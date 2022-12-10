@@ -1,4 +1,4 @@
-using EdwardSFlores.DataAccess.Database.Persistence.BaseDomain;
+using EdwardSFlores.DataAccess.Database.Core.BaseDomain;
 using Microsoft.EntityFrameworkCore;
 
 namespace EdwardSFlores.DataAccess.Database.Core.Domain;

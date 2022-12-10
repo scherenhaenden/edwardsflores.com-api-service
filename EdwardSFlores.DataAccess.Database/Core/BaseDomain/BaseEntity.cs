@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using EdwardSFlores.DataAccess.Database.Core.BaseDomain;
 
-namespace EdwardSFlores.DataAccess.Database.Persistence.BaseDomain;
+namespace EdwardSFlores.DataAccess.Database.Core.BaseDomain;
 
 public class BaseEntity : IBaseEntity
 {

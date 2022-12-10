@@ -1,0 +1,9 @@
+# Begin with Nunit Tests
+
+name: CI
+
+
+on:
+  push:
+    branches:
+      - 'tests/nunit'
