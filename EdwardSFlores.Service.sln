@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdwardSFlores.Service", "EdwardSFlores.Service\EdwardSFlores.Service.csproj", "{9BFA75C2-E4CF-4DD1-B862-B89CBC630942}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdwardSFlores.DataAccess.Database", "EdwardSFlores.DataAccess.Database\EdwardSFlores.DataAccess.Database.csproj", "{219DE40E-D025-4662-89BE-CFC83A258C61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BFA75C2-E4CF-4DD1-B862-B89CBC630942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BFA75C2-E4CF-4DD1-B862-B89CBC630942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BFA75C2-E4CF-4DD1-B862-B89CBC630942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BFA75C2-E4CF-4DD1-B862-B89CBC630942}.Release|Any CPU.Build.0 = Release|Any CPU
+		{219DE40E-D025-4662-89BE-CFC83A258C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{219DE40E-D025-4662-89BE-CFC83A258C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{219DE40E-D025-4662-89BE-CFC83A258C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{219DE40E-D025-4662-89BE-CFC83A258C61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
