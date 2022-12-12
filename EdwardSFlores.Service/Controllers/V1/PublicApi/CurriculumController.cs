@@ -2,6 +2,7 @@ using EdwardSFlores.Service.Configuration.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace EdwardSFlores.Service.Controllers.V1.PublicApi;
 
@@ -29,8 +30,11 @@ public class CurriculumController : Controller
     [Route("Config")]
     public async Task<IActionResult> Config()
     {
-       
-        return Ok(_options.Value.DataAccess.DataBases.Global[0].ConnectionString);
+       // object to json
+         var json = JsonConvert.SerializeObject(_options.Value);
+        
+        
+        return Ok(json);
         
      
 
