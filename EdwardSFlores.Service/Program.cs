@@ -29,7 +29,7 @@ var localSettings = configuration.GetSection("ConfigurationOfApplication").Get<C
 
 IConfigurationLoad configurationLoader = new ConfigurationLoad();
 var localSettings  = configurationLoader.LoadAndGetConfiguration("Development");
-var database = localSettings.DataAccess.DataBases.Global.FirstOrDefault(x => x.ContextName == "MacLocal");
+var database = localSettings.DataAccess.DataBases.Global.FirstOrDefault(x => x.ContextName == "unique");
 
 // Add mysql context
 builder.Services.AddDbContext<DbContextEdward>(options =>

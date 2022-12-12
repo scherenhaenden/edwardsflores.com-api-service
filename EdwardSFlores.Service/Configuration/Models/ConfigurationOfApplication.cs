@@ -2,6 +2,7 @@ namespace EdwardSFlores.Service.Configuration.Models;
 
 public class ConfigurationOfApplication
 {
+    public string Environment { get; set; } 
     public DataAccess DataAccess { get; set; }
     
     public TemporalKeys Temporal { get; set; }
