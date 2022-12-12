@@ -14,5 +14,5 @@ RUN apt-get -qq -y install inetutils-ping net-tools
 
 FROM base AS final
 WORKDIR /app
-COPY ./release/output/ /app/publish/ 
+COPY ./output/ /app/publish/ 
 ENTRYPOINT ["dotnet", "/app/publish/EdwardSFlores.Service.dll"]
