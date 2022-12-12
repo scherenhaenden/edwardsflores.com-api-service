@@ -52,11 +52,11 @@ jobs:
           password: ${{ secrets.edwardsflores_password }}
           port: 22
           script: |
-            whoami
-            ls -ali
+            whoami            
             cd httpdocs
             cd Docker
             ls -ali
+            rm ./release -r
             unzip -qq -o release.zip
             cp appsettings.json ./release/output
             cd release
