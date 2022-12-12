@@ -1,3 +1,4 @@
+using System.Configuration;
 using EdwardSFlores.BusinessLogic.Services;
 using EdwardSFlores.BusinessLogic.Services.Login;
 using EdwardSFlores.BusinessLogic.Services.SingUp;
@@ -26,9 +27,18 @@ var localSettings = configuration.GetSection("ConfigurationOfApplication").Get<C
 
 // get the database with contextname "global" from the configuration
 
+// load configuration settings
+var configuration = builder.Configuration;
+var appSettingsSection = configuration.GetSection("ConfigurationOfApplication");
+    
+appSettingsSection.Bind(builder.Configuration);
+
 
 IConfigurationLoad configurationLoader = new ConfigurationLoad();
+
+
 var localSettings  = configurationLoader.LoadAndGetConfiguration("Development");
+builder.Services.Configure<ConfigurationOfApplication>(appSettingsSection);
 var database = localSettings.DataAccess.DataBases.Global.FirstOrDefault(x => x.ContextName == "unique");
 
 // Add mysql context
