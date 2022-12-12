@@ -21,4 +21,4 @@ docker images | grep ${CONTAINER_NAME}  | awk '{print $3}' | xargs docker rmi -f
 docker build -t ${CONTAINER_NAME} .
 
 # Run the docker image
-docker run -d -p 15003:80 ${CONTAINER_NAME}
+docker run -d -p 15003:80 --network=host ${CONTAINER_NAME}
