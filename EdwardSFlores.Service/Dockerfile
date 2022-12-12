@@ -4,9 +4,15 @@ EXPOSE 80
 EXPOSE 443
 
 # Install ping
-RUN apt-get update && apt-get install -y inetutils-ping net-tools
+RUN apt-get -qq clean  
+RUN apt-get -qq update
+RUN apt-get -qq -y install apt-utils
+RUN apt-get -qq -y install dialog
+RUN apt-get -qq update
+RUN apt-get -qq -y install bash-completion --fix-missing
+RUN apt-get -qq -y install inetutils-ping net-tools 
 
 FROM base AS final
 WORKDIR /app
-COPY ./output/ /app/publish/ 
+COPY ./release/output/ /app/publish/ 
 ENTRYPOINT ["dotnet", "/app/publish/EdwardSFlores.Service.dll"]
