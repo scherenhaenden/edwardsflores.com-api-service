@@ -3,3 +3,11 @@ EdwardSFlores.DataAccess.Database/obj/
 EdwardSFlores.Service/obj/
 EdwardSFlores.DataAccess.Database/bin/
 EdwardSFlores.Service/bin/
+EdwardSFlores.BusinessLogic.Tests/bin/
+EdwardSFlores.BusinessLogic.Tests/obj/
+EdwardSFlores.BusinessLogic/obj/
+EdwardSFlores.BusinessLogic/bin/
+
+EdwardSFlores.Service/output/
+EdwardSFlores.DataAccess/bin/
+EdwardSFlores.DataAccess/obj/

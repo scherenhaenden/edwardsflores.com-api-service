@@ -18,7 +18,31 @@ public class ConfigurationLoad:IConfigurationLoad
         configuration.Bind(configurationOfApplication);
 
         return configurationOfApplication;*/
-        throw new NotImplementedException();
+        // get current directory
+        var currentDirectory = Directory.GetCurrentDirectory();
+        
+        // get configuration file
+        var configurationFile = Path.Combine(currentDirectory + "/publish", $"appsettings.json");
+        
+        // check if configuration file exists
+        if (!File.Exists(configurationFile))
+        {
+            throw new FileNotFoundException($"Configuration file {configurationFile} not found");
+        }
+        
+        // read configuration file
+        var configurationFileContent = File.ReadAllText(configurationFile);
+        
+        var parsedObject = JObject.Parse(configurationFileContent);
+        
+        var popupJson = parsedObject["ConfigurationOfApplication"].ToString();
+        
+        // parse json to object
+        var configurationOfApplication = JsonConvert.DeserializeObject<ConfigurationOfApplication>(
+            popupJson);
+
+        return configurationOfApplication;
+
     }
 
     public ConfigurationOfApplication LoadAndGetConfiguration(string environment)
@@ -32,7 +56,12 @@ public class ConfigurationLoad:IConfigurationLoad
         // check if configuration file exists
         if (!File.Exists(configurationFile))
         {
-            throw new FileNotFoundException($"Configuration file {configurationFile} not found");
+            
+            return LoadAndGetConfiguration();
+            
+            
+            
+            //throw new FileNotFoundException($"Configuration file {configurationFile} not found");
         }
         
         // read configuration file
