@@ -24,6 +24,16 @@ if [ "$(docker ps -aq -f name=${CONTAINER_NAME})" ]; then
     docker rm ${CONTAINER_NAME}
 fi
 
+# check if container is running
+if [ "$(docker ps name=${CONTAINER_NAME})" ]; then
+    # stop container
+    echo "stop container"
+    docker ps |grep edwardflores/service-beta | awk '{print $1}' | xargs docker stop
+fi
+
+
+
+
 #cd ${RELEASE_DIRECTORY}
 #docker images | grep ${CONTAINER_NAME}
 #docker stop $(docker ps -a -q --filter name='${CONTAINER_NAME}' --format="{{.ID}}")
@@ -35,4 +45,14 @@ fi
 docker build -t ${CONTAINER_NAME} .
 
 # Run the docker image
-docker run -d -p 15009:80 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME}
+docker run -it -d -p 15009:80 150010:443 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME}
+
+
+#docker images | grep edwardflores/service-beta  | awk '{print $3}'| xargs docker stop 
+
+#docker ps -q -f name=edwardflores/service-beta
+
+
+#docker ps -a -q --filter name='edwardflores/service-beta' --format="{{.ID}}"
+
+#docker ps |grep edwardflores/service-beta | awk '{print $1}' | xargs docker stop

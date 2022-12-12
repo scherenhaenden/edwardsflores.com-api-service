@@ -3,6 +3,9 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+# Install ping
+RUN apt-get update && apt-get install -y iputils- net-tools
+
 FROM base AS final
 WORKDIR /app
 COPY ./output/ /app/publish/ 
