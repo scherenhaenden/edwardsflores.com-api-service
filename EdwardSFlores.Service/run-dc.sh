@@ -41,7 +41,7 @@ docker images | grep ${CONTAINER_NAME}  | awk '{print $3}' | xargs docker rmi -f
 docker ps |grep edwardsfloresservice-web | awk '{print $1}' | xargs docker stop
 docker images | grep edwardsfloresservice-web  | awk '{print $3}' | xargs docker rmi -f
 
-docker rm $(docker ps -a -q --filter name='edwardsfloresservice-web' --format="{{.ID}}")
+docker rm $(docker ps -a x
 
 #cd ${RELEASE_DIRECTORY}
 #docker images | grep ${CONTAINER_NAME}
@@ -49,7 +49,7 @@ docker rm $(docker ps -a -q --filter name='edwardsfloresservice-web' --format="{
 # Get if the image exists in docker and if exists stop it 
 #docker images | grep ${CONTAINER_NAME}  | awk '{print $3}' #| xargs docker stop 
 #docker images | grep ${CONTAINER_NAME}  | awk '{print $3}' | xargs docker rmi -f
-cat ./release/output/appsettings.json
+cat ./output/appsettings.json
 
 # Build the docker image
 #docker build -t ${CONTAINER_NAME} .
