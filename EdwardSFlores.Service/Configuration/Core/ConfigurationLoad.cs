@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using EdwardSFlores.Service.Configuration.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -20,6 +21,7 @@ public class ConfigurationLoad:IConfigurationLoad
         return configurationOfApplication;*/
         // get current directory
         var currentDirectory = Directory.GetCurrentDirectory();
+        Debug.Print("Current Directory: " + currentDirectory);
         
         // get configuration file
         var configurationFile = Path.Combine(currentDirectory + "/publish", $"appsettings.json");
@@ -50,12 +52,21 @@ public class ConfigurationLoad:IConfigurationLoad
         // get current directory
         var currentDirectory = Directory.GetCurrentDirectory();
         
+        var fileName = $"appsettings.{environment}.json";
+        
         // get configuration file
         var configurationFile = Path.Combine(currentDirectory, $"appsettings.{environment}.json");
         
         // check if configuration file exists
         if (!File.Exists(configurationFile))
         {
+            // print in console log
+            Console.WriteLine($"Configuration file {configurationFile} not found");
+            
+            // find the file in any subdirectory
+            //var files = Directory.GetFiles(currentDirectory, fileName, SearchOption.AllDirectories);
+            
+            
             
             return LoadAndGetConfiguration();
             
