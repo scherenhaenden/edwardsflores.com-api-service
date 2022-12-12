@@ -59,8 +59,8 @@ jobs:
             rm ./release -r
             unzip -qq -o release.zip
             cp appsettings.json ./release/output
-            cp ./release/Dockerfile ./
-            bash run.sh
+            cd ./release/
+            bash ./run.sh
 
   
 
