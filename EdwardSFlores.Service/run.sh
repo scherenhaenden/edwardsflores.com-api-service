@@ -45,7 +45,7 @@ fi
 docker build -t ${CONTAINER_NAME} .
 
 # Run the docker image
-docker run -it -d -p 15009:80 150010:443 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME}
+docker run -it -d -p 15009:80 -p 15008:443 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME}
 
 
 #docker images | grep edwardflores/service-beta  | awk '{print $3}'| xargs docker stop 
