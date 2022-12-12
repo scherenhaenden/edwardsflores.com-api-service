@@ -29,10 +29,10 @@ jobs:
           include-prerelease: true
       - name: Run a multi-line script
         run: |
-          sh ./EdwardSFlores.Service/build.sh
+          sh ./build.sh
       - name: Run a multi-line script
         run: |
-          sh ./EdwardSFlores.Service/create-zip.sh
+          sh ./create-zip.sh
 
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
@@ -60,7 +60,7 @@ jobs:
             unzip -qq -o release.zip
             cp appsettings.json ./release/output
             cd ./release/
-            bash ./run-dc.sh
+            bash ./run-dc.Beta.sh
 
   
 

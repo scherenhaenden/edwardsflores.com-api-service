@@ -68,4 +68,4 @@ cat ./output/appsettings.json
 #docker ps |grep edwardflores/service-beta | awk '{print $1}' | xargs docker stop
 
 docker-compose -f docker-compose.Beta.yml build
-docker-compose -f docker-compose.yml up -d 
+docker-compose -f docker-compose.Beta.yml up -d 

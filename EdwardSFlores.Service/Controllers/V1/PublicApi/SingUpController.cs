@@ -40,15 +40,5 @@ public class SingUpController: Controller
      
 
     }
-    
-    [AllowAnonymous]
-    [HttpGet]
-    public async Task<IActionResult> Config()
-    {
-       
-            return Ok(_options.Value.DataAccess.DataBases.Global[0].ConnectionString);
-        
-     
 
-    }
 }
