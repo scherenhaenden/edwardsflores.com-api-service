@@ -41,7 +41,7 @@ docker images | grep ${CONTAINER_NAME}  | awk '{print $3}' | xargs docker rmi -f
 docker ps |grep edwardsfloresservice-web | awk '{print $1}' | xargs docker stop
 docker images | grep edwardsfloresservice-web  | awk '{print $3}' | xargs docker rmi -f
 
-docker rm $(docker ps -a x
+docker rm $(docker ps -a -q --filter name='edwardsfloresservice-web' --format="{{.ID}}")
 
 #cd ${RELEASE_DIRECTORY}
 #docker images | grep ${CONTAINER_NAME}
