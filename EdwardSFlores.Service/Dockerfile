@@ -4,7 +4,7 @@ EXPOSE 80
 EXPOSE 443
 
 # Install ping
-RUN apt-get update && apt-get install -y iputils- net-tools
+RUN apt-get update && apt-get install -y inetutils-ping net-tools
 
 FROM base AS final
 WORKDIR /app
