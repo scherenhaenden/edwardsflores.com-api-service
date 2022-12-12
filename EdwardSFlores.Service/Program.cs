@@ -39,8 +39,9 @@ appSettingsSection.Bind(builder.Configuration);
 
 IConfigurationLoad configurationLoader = new ConfigurationLoad();
 
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-var localSettings  = configurationLoader.LoadAndGetConfiguration("Development");
+var localSettings  = configurationLoader.LoadAndGetConfiguration(environment);
 builder.Services.Configure<ConfigurationOfApplication>(appSettingsSection);
 var database = localSettings.DataAccess.DataBases.Global.FirstOrDefault(x => x.ContextName == "unique");
 

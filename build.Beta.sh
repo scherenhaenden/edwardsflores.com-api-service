@@ -26,6 +26,6 @@ echo "copy Dockerfile"
 ls -ali
 cd EdwardSFlores.Service
 cp Dockerfile.Beta ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
-cp docker-compose.yml ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
+cp docker-compose.Beta.yml ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
 cp run.sh ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
 cp run-dc.sh ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
