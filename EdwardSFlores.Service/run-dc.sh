@@ -2,7 +2,6 @@
 # Build and run the service
 # Path: EdwardSFlores.Service/build-and-run.sh
 
-
 # Set variable name for the container
 CONTAINER_NAME=edwardsfloresservice-web 
 
@@ -30,8 +29,11 @@ if [ "$(docker ps name=${CONTAINER_NAME})" ]; then
     echo "stop container"
     docker ps |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop
 fi
- docker ps |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop
-  docker ps |grep 15009 | awk '{print $1}' | xargs docker stop
+
+
+
+docker ps |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop
+docker ps |grep 15009 | awk '{print $1}' | xargs docker stop
 
 docker ps |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop
 docker images | grep ${CONTAINER_NAME}  | awk '{print $3}' | xargs docker rmi -f
