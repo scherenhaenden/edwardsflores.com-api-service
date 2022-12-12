@@ -2,6 +2,9 @@
 # Build and run the service
 # Path: EdwardSFlores.Service/build-and-run.sh
 
+#get current directory
+CURRENT_DIRECTORY=$(pwd)
+
 # Set variable name for the container
 CONTAINER_NAME=edwardflores/service-release
 
@@ -16,11 +19,11 @@ dotnet restore
 #dotnet build -c Debug -o output
 
 # Build the application .net core with output in directory "output"
-dotnet publish -c Debug -o ${RELEASE_DIRECTORY}/${OUTPUT_DIRECTORY}
+dotnet publish -c Debug -o ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}/${OUTPUT_DIRECTORY}
 
 # Copy Dockerfile to output directory
 echo "copy Dockerfile"
 ls -ali
 cd EdwardSFlores.Service
-cp Dockerfile ${RELEASE_DIRECTORY}
-cp run.sh ${RELEASE_DIRECTORY}
+cp Dockerfile ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
+cp run.sh ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
