@@ -23,6 +23,7 @@ public class ConfigurationLoad:IConfigurationLoad
         var currentDirectory = Directory.GetCurrentDirectory();
         Debug.Print("Current Directory: " + currentDirectory);
         
+        
         // get configuration file
         var configurationFile = Path.Combine(currentDirectory + "/publish", $"appsettings.json");
         
@@ -47,15 +48,38 @@ public class ConfigurationLoad:IConfigurationLoad
 
     }
 
+    private string GetNameOfConfigurationFile(string environment)
+    {
+        var configurationFile = "appsettings.json";
+        if (!string.IsNullOrEmpty(environment))
+        {
+            configurationFile = $"appsettings.{environment}.json";
+        }
+
+        return configurationFile;
+    }
+    
+    private string GetPathOfConfigurationFile(string currentDirectory, string configurationFile)
+    {
+        var configurationFilePath = Path.Combine(currentDirectory, configurationFile);
+        if (!File.Exists(configurationFilePath))
+        {
+            configurationFilePath = Path.Combine(currentDirectory + "/publish", configurationFile);
+        }
+
+        return configurationFilePath;
+    }
+    
+
     public ConfigurationOfApplication LoadAndGetConfiguration(string environment)
     {
         // get current directory
         var currentDirectory = Directory.GetCurrentDirectory();
-        
-        var fileName = $"appsettings.{environment}.json";
+
+        var fileName = GetNameOfConfigurationFile(environment);
         
         // get configuration file
-        var configurationFile = Path.Combine(currentDirectory, $"appsettings.{environment}.json");
+        var configurationFile = GetPathOfConfigurationFile(currentDirectory, fileName);
         
         // check if configuration file exists
         if (!File.Exists(configurationFile))
@@ -63,15 +87,7 @@ public class ConfigurationLoad:IConfigurationLoad
             // print in console log
             Console.WriteLine($"Configuration file {configurationFile} not found");
             
-            // find the file in any subdirectory
-            //var files = Directory.GetFiles(currentDirectory, fileName, SearchOption.AllDirectories);
-            
-            
-            
             return LoadAndGetConfiguration();
-            
-            
-            
             //throw new FileNotFoundException($"Configuration file {configurationFile} not found");
         }
         
