@@ -31,7 +31,7 @@ public class SingUpController: Controller
             var response = await _singUpServiceBusinessLogic.SingUp(request);
             if(response)
                 return Ok(response);
-            return BadRequest(response);       
+            return BadRequest("error of what type");       
         }
         catch (Exception e)
         {
