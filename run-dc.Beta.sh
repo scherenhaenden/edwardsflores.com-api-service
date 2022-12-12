@@ -66,6 +66,7 @@ cat ./output/appsettings.json
 #docker ps -a -q --filter name='edwardflores/service-beta' --format="{{.ID}}"
 
 #docker ps |grep edwardflores/service-beta | awk '{print $1}' | xargs docker stop
-
+echo $(pwd)
+ls -ali
 docker-compose -f docker-compose.Beta.yml build
 docker-compose -f docker-compose.Beta.yml up -d 
