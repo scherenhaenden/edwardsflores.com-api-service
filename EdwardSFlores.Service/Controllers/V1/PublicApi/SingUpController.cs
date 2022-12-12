@@ -35,7 +35,7 @@ public class SingUpController: Controller
         }
         catch (Exception e)
         {
-            return BadRequest(_options.Value.DataAccess.DataBases.Global[0].ConnectionString);
+            return BadRequest(e);
         }
      
 
