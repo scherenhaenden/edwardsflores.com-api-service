@@ -1,4 +1,5 @@
 using System.Configuration;
+using System.Diagnostics;
 using EdwardSFlores.BusinessLogic.Services;
 using EdwardSFlores.BusinessLogic.Services.Login;
 using EdwardSFlores.BusinessLogic.Services.SingUp;
@@ -12,6 +13,8 @@ using EdwardSFlores.Service.Configuration.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 // Add services to the container.
 
@@ -30,7 +33,7 @@ var localSettings = configuration.GetSection("ConfigurationOfApplication").Get<C
 // load configuration settings
 var configuration = builder.Configuration;
 var appSettingsSection = configuration.GetSection("ConfigurationOfApplication");
-    
+
 appSettingsSection.Bind(builder.Configuration);
 
 
