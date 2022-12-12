@@ -35,4 +35,4 @@ fi
 docker build -t ${CONTAINER_NAME} .
 
 # Run the docker image
-docker run -d -p 15009:80 --network=host ${CONTAINER_NAME}
+docker run -d -p 15009:80 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME}
