@@ -5,11 +5,9 @@ name: CI
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  pull_request:
+  push:
     branches:
-      - 'beta'      
-    types:
-      - closed
+      - '*'      
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -56,7 +54,7 @@ jobs:
             cd httpdocs
             cd Docker
             ls -ali
-            rm ./release -r
+            rm ./release -rf
             unzip -qq -o release.zip
             cp appsettings.json ./release/output
             cd ./release/
