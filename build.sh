@@ -33,5 +33,5 @@ dotnet publish -c Debug -o ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}/${OUTPUT_DI
 echo "copy Dockerfile"
 ls -ali
 cp Dockerfile.Beta ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
-cp docker-compose.yml ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
+cp docker-compose.Beta.yml ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
 cp run.sh ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}

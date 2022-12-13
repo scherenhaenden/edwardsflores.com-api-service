@@ -70,5 +70,5 @@ fi
 #docker ps |grep edwardsfloresservice-web| awk '{print $3}'| xargs docker inspect 
 
 
-docker-compose -f docker-compose.yml build
-docker-compose -f docker-compose.yml up -d 
+docker-compose -f docker-compose.Beta.yml build
+docker-compose -f docker-compose.Beta.yml up -d 
