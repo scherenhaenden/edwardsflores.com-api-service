@@ -10,6 +10,22 @@ using TunnelConnector.Protocls;
 
 namespace EdwardSFlores.Service.Configuration.ContextManager;
 
+
+public interface IServiceCollectionProvider 
+{
+    IServiceCollection ServiceCollection { get; }
+}
+
+public sealed class ServiceCollectionProvider: IServiceCollectionProvider
+{
+    public ServiceCollectionProvider(IServiceCollection serviceCollection)
+    {
+        ServiceCollection = serviceCollection;
+    }
+
+    public IServiceCollection ServiceCollection { get; }
+}
+
 public interface IDataContextManager
 {
     IUnitOfWork UnitOfWork { get; }
@@ -17,12 +33,16 @@ public interface IDataContextManager
 
 public class DataContextManager : IDataContextManager
 {
+    private readonly IServiceProvider _provider;
+    private readonly IServiceCollectionProvider _serviceCollectionProvider;
     private readonly ConfigurationOfApplication _appSettings;
     public IUnitOfWork UnitOfWork { get; private set; }
     private static ILoadBalancer _loadBalancer;
 
-    public DataContextManager(IOptions<ConfigurationOfApplication> appSettings)
+    public DataContextManager(IOptions<ConfigurationOfApplication> appSettings,IServiceProvider provider, IServiceCollectionProvider serviceCollectionProvider)
     {
+        _provider = provider;
+        _serviceCollectionProvider = serviceCollectionProvider;
         _appSettings = appSettings.Value;
         CreateUnitOfWork();
     }
@@ -65,8 +85,10 @@ public class DataContextManager : IDataContextManager
         var context = new DbContextEdward(options.Options);
             
         
-        
+        _serviceCollectionProvider.ServiceCollection.AddDbContext<DbContextEdward>(options =>
+            options.UseMySQL(connectionString));
         UnitOfWork = new UnitOfWork(context);
+        _serviceCollectionProvider.ServiceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
     
 
     }

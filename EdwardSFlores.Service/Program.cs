@@ -8,6 +8,7 @@ using EdwardSFlores.DataAccess.Database.Core.Unities;
 using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
 using EdwardSFlores.DataAccess.Database.Persistence.Unities;
 using EdwardSFlores.DataAccess.Services.SingUp;
+using EdwardSFlores.Service.Configuration.ContextManager;
 using EdwardSFlores.Service.Configuration.Core;
 using EdwardSFlores.Service.Configuration.Models;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,9 @@ var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 var localSettings  = configurationLoader.LoadAndGetConfiguration(environment);
 builder.Services.Configure<ConfigurationOfApplication>(appSettingsSection);
 var database = localSettings.DataAccess.DataBases.Global.FirstOrDefault(x => x.ContextName == "unique");
+
+builder.Services.AddSingleton<IServiceCollectionProvider>(new ServiceCollectionProvider(builder.Services));
+builder.Services.AddSingleton<IDataContextManager, DataContextManager>();
 
 // Add mysql context
 builder.Services.AddDbContext<DbContextEdward>(options =>
