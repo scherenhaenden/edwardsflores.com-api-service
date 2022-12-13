@@ -10,6 +10,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdwardSFlores.BusinessLogic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdwardSFlores.BusinessLogic.Tests", "EdwardSFlores.BusinessLogic.Tests\EdwardSFlores.BusinessLogic.Tests.csproj", "{991B34C0-6C54-473E-B221-35E471BC91A0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConfigFiles", "ConfigFiles", "{6D24278B-2B17-430B-8D12-52101CE37E9F}"
+	ProjectSection(SolutionItems) = preProject
+		build-and-run.Development.sh = build-and-run.Development.sh
+		build-and-run.sh = build-and-run.sh
+		build.Beta.sh = build.Beta.sh
+		build.Development.sh = build.Development.sh
+		build.sh = build.sh
+		create-zip.sh = create-zip.sh
+		docker-compose.Beta.yml = docker-compose.Beta.yml
+		docker-compose.Development.yml = docker-compose.Development.yml
+		docker-compose.yml = docker-compose.yml
+		Dockerfile copy.Beta = Dockerfile copy.Beta
+		Dockerfile.Beta = Dockerfile.Beta
+		Dockerfile.Development = Dockerfile.Development
+		run-dc.Beta.sh = run-dc.Beta.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -11,6 +11,14 @@ CONTAINER_NAME=edwardflores/service-release
 # Set variable name for output directory
 RELEASE_DIRECTORY=release
 OUTPUT_DIRECTORY=output
+FULLPATH_OUTPUT=${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}/${OUTPUT_DIRECTORY}
+
+# check if release directory exists
+if [ -d "${RELEASE_DIRECTORY}" ]; then
+    # remove release directory
+    echo "remove release directory"
+    rm -rf ${RELEASE_DIRECTORY}
+fi
 
 # Restore the application dependencies
 dotnet restore 
@@ -25,7 +33,6 @@ dotnet publish -c Debug -o ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}/${OUTPUT_DI
 echo "copy Dockerfile"
 ls -ali
 cd EdwardSFlores.Service
-cp Dockerfile ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
+cp Dockerfile.Beta ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
 cp docker-compose.yml ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
 cp run.sh ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
-cp run-dc.sh ${CURRENT_DIRECTORY}/${RELEASE_DIRECTORY}
