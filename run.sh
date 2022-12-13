@@ -38,8 +38,8 @@ if [ "$(docker ps name=${CONTAINER_NAME})" ]; then
     echo "stop container"
     docker ps |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop
 fi
- docker ps |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop
-  docker ps |grep 15009 | awk '{print $1}' | xargs docker stop
+ #docker ps |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop
+ # docker ps |grep 15009 | awk '{print $1}' | xargs docker stop
 
 
 
@@ -52,10 +52,10 @@ fi
 #cat ./release/output/appsettings.json
 
 # Build the docker image
-docker build -t ${CONTAINER_NAME} .
+#docker build -t ${CONTAINER_NAME} .
 
 # Run the docker image
-docker run -it -d -p 15009:80 -p 15008:443 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME}
+#docker run -it -d -p 15009:80 -p 15008:443 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME}
 
 
 #docker images | grep edwardflores/service-beta  | awk '{print $3}'| xargs docker stop 
@@ -68,3 +68,7 @@ docker run -it -d -p 15009:80 -p 15008:443 --add-host=host.docker.internal:host-
 #docker ps |grep edwardflores/service-beta | awk '{print $1}' | xargs docker stop
 
 #docker ps |grep edwardsfloresservice-web| awk '{print $3}'| xargs docker inspect 
+
+
+docker-compose -f docker-compose.yml build
+docker-compose -f docker-compose.yml up -d 
