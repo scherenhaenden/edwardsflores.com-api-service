@@ -13,7 +13,7 @@ services:
     container_name: "edwardflores-service-development"
     # Add network to reach mysql server im host 
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "host.docker.internal:127.0.0.1"
       
       
     
