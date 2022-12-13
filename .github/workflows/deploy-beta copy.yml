@@ -7,9 +7,9 @@ name: CI
 on:
   pull_request:
     branches:
-      - 'none'      
+      - 'beta'      
     types:
-      - closed
+      - closed  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -29,10 +29,10 @@ jobs:
           include-prerelease: true
       - name: Run a multi-line script
         run: |
-          sh ./EdwardSFlores.Service/build.sh
+          sh ./build.sh
       - name: Run a multi-line script
         run: |
-          sh ./EdwardSFlores.Service/create-zip.sh
+          sh ./create-zip.sh
 
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
@@ -56,11 +56,11 @@ jobs:
             cd httpdocs
             cd Docker
             ls -ali
-            rm ./release -r
+            rm ./release -rf
             unzip -qq -o release.zip
             cp appsettings.json ./release/output
             cd ./release/
-            bash ./run-dc.sh
+            bash ./run.sh
 
   
 

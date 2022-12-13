@@ -4,6 +4,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdwardSFlores.Service", "Ed
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdwardSFlores.DataAccess.Database", "EdwardSFlores.DataAccess.Database\EdwardSFlores.DataAccess.Database.csproj", "{219DE40E-D025-4662-89BE-CFC83A258C61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdwardSFlores.DataAccess", "EdwardSFlores.DataAccess\EdwardSFlores.DataAccess.csproj", "{1CC38185-78BA-4F27-8B73-6D374F630CC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdwardSFlores.BusinessLogic", "EdwardSFlores.BusinessLogic\EdwardSFlores.BusinessLogic.csproj", "{959BBCD8-DF22-4CA6-9D14-C6107C114E09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdwardSFlores.BusinessLogic.Tests", "EdwardSFlores.BusinessLogic.Tests\EdwardSFlores.BusinessLogic.Tests.csproj", "{991B34C0-6C54-473E-B221-35E471BC91A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConfigFiles", "ConfigFiles", "{6D24278B-2B17-430B-8D12-52101CE37E9F}"
+	ProjectSection(SolutionItems) = preProject
+		build-and-run.Development.sh = build-and-run.Development.sh
+		build-and-run.sh = build-and-run.sh
+		build.Beta.sh = build.Beta.sh
+		build.Development.sh = build.Development.sh
+		build.sh = build.sh
+		create-zip.sh = create-zip.sh
+		docker-compose.Beta.yml = docker-compose.Beta.yml
+		docker-compose.Development.yml = docker-compose.Development.yml
+		docker-compose.yml = docker-compose.yml
+		Dockerfile copy.Beta = Dockerfile copy.Beta
+		Dockerfile.Beta = Dockerfile.Beta
+		Dockerfile.Development = Dockerfile.Development
+		run-dc.Beta.sh = run-dc.Beta.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +41,17 @@ Global
 		{219DE40E-D025-4662-89BE-CFC83A258C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{219DE40E-D025-4662-89BE-CFC83A258C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{219DE40E-D025-4662-89BE-CFC83A258C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CC38185-78BA-4F27-8B73-6D374F630CC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CC38185-78BA-4F27-8B73-6D374F630CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CC38185-78BA-4F27-8B73-6D374F630CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CC38185-78BA-4F27-8B73-6D374F630CC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{959BBCD8-DF22-4CA6-9D14-C6107C114E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{959BBCD8-DF22-4CA6-9D14-C6107C114E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{959BBCD8-DF22-4CA6-9D14-C6107C114E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{959BBCD8-DF22-4CA6-9D14-C6107C114E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{991B34C0-6C54-473E-B221-35E471BC91A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{991B34C0-6C54-473E-B221-35E471BC91A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{991B34C0-6C54-473E-B221-35E471BC91A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{991B34C0-6C54-473E-B221-35E471BC91A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

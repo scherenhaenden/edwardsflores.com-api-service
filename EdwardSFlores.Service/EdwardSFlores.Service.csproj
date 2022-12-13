@@ -17,9 +17,12 @@
         <PackageReference Include="MySqlConnector" Version="2.2.2" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
+        <PackageReference Include="TunnelConnector" Version="0.5.3" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\EdwardSFlores.BusinessLogic\EdwardSFlores.BusinessLogic.csproj" />
       <ProjectReference Include="..\EdwardSFlores.DataAccess.Database\EdwardSFlores.DataAccess.Database.csproj" />
     </ItemGroup>
 
