@@ -47,39 +47,9 @@ public class DataContextManagerSsh: IDataContextManager
         
         
         
-        var server = loadBalancerConfiguration.ForeignHost;
-        var sshUserName = loadBalancerConfiguration.User;
-        var sshPassword = loadBalancerConfiguration.Password;
       
 
-        var (sshClient, localPort) = ConnectSsh(server, sshUserName, sshPassword);
-        using (sshClient)
-        {
-            var connectionStringv3 = dbContextManagementModel.DbConnectionString.Replace("Port=3306", $"Port=3307");
-            var options2f = new DbContextOptionsBuilder<DbContextEdward>();
-            //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-            try
-            {
-                options2f.UseMySql(connectionStringv3, ServerVersion.AutoDetect(connectionStringv3)/*, mySqlOptions =>
-                        mySqlOptions.EnableRetryOnFailure(
-                            maxRetryCount: 10,
-                            maxRetryDelay: TimeSpan.FromSeconds(1),
-                            errorNumbersToAdd: null)*/);
-                
-                
-                // create db context
-                DbContextEdward = new DbContextEdward(options2f.Options);
-                GenericUnityOfWork = new GenericGenericUnitOfWork(DbContextEdward);
-                return;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-            
-        }
+  
         
         using (var client = new SshClient(loadBalancerConfiguration.ForeignHost, loadBalancerConfiguration.User, loadBalancerConfiguration.Password))
         {
