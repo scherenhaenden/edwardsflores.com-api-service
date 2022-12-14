@@ -1,6 +1,7 @@
 using EdwardSFlores.DataAccess.Database.ContextManagement;
 using EdwardSFlores.DataAccess.Database.Core.Domain;
 using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
+using Renci.SshNet;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
 
@@ -28,4 +29,6 @@ public class UsersDataAccessDatabaseRepository: GenericRepository<User>, IUsersD
     {
         return _dbContextEdward.Users.ToList();
     }
+    
+
 }

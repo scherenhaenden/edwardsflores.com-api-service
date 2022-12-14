@@ -14,6 +14,7 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Configuration
             try
             {
                 base.Database.EnsureCreated();   
+                base.Database.OpenConnection();
             }catch(Exception ex)
             {
             

@@ -6,7 +6,9 @@ using TunnelConnector.Credentials;
 using TunnelConnector.LoadBalancer;
 using TunnelConnector.Protocls;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Renci.SshNet;
 
 namespace EdwardSFlores.DataAccess.Database.ContextManagement;
 
@@ -41,6 +43,82 @@ public class DataContextManagerSsh: IDataContextManager
             CurrentProtocol = AvailableProtocols.Ssh
         };
         _loadBalancer = new LoadBalancer(loadBalancerConfiguration);
+        
+        
+        
+        
+        var server = loadBalancerConfiguration.ForeignHost;
+        var sshUserName = loadBalancerConfiguration.User;
+        var sshPassword = loadBalancerConfiguration.Password;
+      
+
+        var (sshClient, localPort) = ConnectSsh(server, sshUserName, sshPassword);
+        using (sshClient)
+        {
+            var connectionStringv3 = dbContextManagementModel.DbConnectionString.Replace("Port=3306", $"Port=3307");
+            var options2f = new DbContextOptionsBuilder<DbContextEdward>();
+            //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            try
+            {
+                options2f.UseMySql(connectionStringv3, ServerVersion.AutoDetect(connectionStringv3)/*, mySqlOptions =>
+                        mySqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 10,
+                            maxRetryDelay: TimeSpan.FromSeconds(1),
+                            errorNumbersToAdd: null)*/);
+                
+                
+                // create db context
+                DbContextEdward = new DbContextEdward(options2f.Options);
+                GenericUnityOfWork = new GenericGenericUnitOfWork(DbContextEdward);
+                return;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            
+        }
+        
+        using (var client = new SshClient(loadBalancerConfiguration.ForeignHost, loadBalancerConfiguration.User, loadBalancerConfiguration.Password))
+        {
+            client.Connect();
+
+            var port = new ForwardedPortLocal("localhost", 3307, loadBalancerConfiguration.ForeignHost, 3306);
+            client.AddForwardedPort(port);
+            
+
+            port.Start();
+            
+            var connectionStringv = dbContextManagementModel.DbConnectionString.Replace("Port=3306", $"Port=3307");
+            var options2 = new DbContextOptionsBuilder<DbContextEdward>();
+            //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            try
+            {
+                options2.UseMySql(connectionStringv, ServerVersion.AutoDetect(connectionStringv)/*, mySqlOptions =>
+                        mySqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 10,
+                            maxRetryDelay: TimeSpan.FromSeconds(1),
+                            errorNumbersToAdd: null)*/);
+                
+                
+                    // create db context
+                DbContextEdward = new DbContextEdward(options2.Options);
+                GenericUnityOfWork = new GenericGenericUnitOfWork(DbContextEdward);
+                return;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            
+
+            //port.Stop();
+            //client.Disconnect();
+        }
          
         
         int portReplace;
@@ -74,6 +152,43 @@ public class DataContextManagerSsh: IDataContextManager
         }
 
             
+    }
+    
+        public static (SshClient SshClient, uint Port) ConnectSsh(string sshHostName, string sshUserName, string sshPassword = null,
+        string sshKeyFile = null, string sshPassPhrase = null, int sshPort = 22, string databaseServer = "localhost", int databasePort = 3306)
+    {
+        // check arguments
+        if (string.IsNullOrEmpty(sshHostName))
+            throw new ArgumentException($"{nameof(sshHostName)} must be specified.", nameof(sshHostName));
+        if (string.IsNullOrEmpty(sshHostName))
+            throw new ArgumentException($"{nameof(sshUserName)} must be specified.", nameof(sshUserName));
+        if (string.IsNullOrEmpty(sshPassword) && string.IsNullOrEmpty(sshKeyFile))
+            throw new ArgumentException($"One of {nameof(sshPassword)} and {nameof(sshKeyFile)} must be specified.");
+        if (string.IsNullOrEmpty(databaseServer))
+            throw new ArgumentException($"{nameof(databaseServer)} must be specified.", nameof(databaseServer));
+
+        // define the authentication methods to use (in order)
+        var authenticationMethods = new List<AuthenticationMethod>();
+        if (!string.IsNullOrEmpty(sshKeyFile))
+        {
+            authenticationMethods.Add(new PrivateKeyAuthenticationMethod(sshUserName,
+                new PrivateKeyFile(sshKeyFile, string.IsNullOrEmpty(sshPassPhrase) ? null : sshPassPhrase)));
+        }
+        if (!string.IsNullOrEmpty(sshPassword))
+        {
+            authenticationMethods.Add(new PasswordAuthenticationMethod(sshUserName, sshPassword));
+        }
+
+        // connect to the SSH server
+        var sshClient = new SshClient(new ConnectionInfo(sshHostName, sshPort, sshUserName, authenticationMethods.ToArray()));
+        sshClient.Connect();
+
+        // forward a local port to the database server and port, using the SSH server
+        var forwardedPort = new ForwardedPortLocal("127.0.0.1", databaseServer, (uint) databasePort);
+        sshClient.AddForwardedPort(forwardedPort);
+        forwardedPort.Start();
+
+        return (sshClient, forwardedPort.BoundPort);
     }
 }
 
