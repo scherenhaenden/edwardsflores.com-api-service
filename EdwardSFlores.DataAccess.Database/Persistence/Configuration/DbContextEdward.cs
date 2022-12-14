@@ -3,6 +3,7 @@ using EdwardSFlores.DataAccess.Database.Core.Configuration;
 using EdwardSFlores.DataAccess.Database.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace EdwardSFlores.DataAccess.Database.Persistence.Configuration
 {
     [ExcludeFromCodeCoverage]

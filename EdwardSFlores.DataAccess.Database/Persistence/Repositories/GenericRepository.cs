@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Repositories
 {
-    public class Repository<TEntity> :IRepository<TEntity> where TEntity : BaseEntity, IBaseEntity
+    public class GenericRepository<TEntity> :IRepository<TEntity> where TEntity : BaseEntity, IBaseEntity
     {
         private readonly DbContext _context;
         public DbSet<TEntity> Entity { get; }
-        public Repository(DbContext context)
+        public GenericRepository(DbContext context)
         {
             try
             {

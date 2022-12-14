@@ -7,11 +7,11 @@ using EdwardSFlores.DataAccess.Database.Persistence.Repositories;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
 {
-    public class UnitOfWork: IUnitOfWork
+    public class GenericGenericUnitOfWork: IGenericUnitOfWork
     {
         private readonly DbContextEdward _context;
     
-        public UnitOfWork(DbContextEdward context)
+        public GenericGenericUnitOfWork(DbContextEdward context)
         {
             _context = context;
 
@@ -21,7 +21,7 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
     
         private  IRepository<T> InitObjects<T>()  where T : BaseEntity
         {
-            return  new Repository<T>(_context);
+            return  new GenericRepository<T>(_context);
         }
 
         public IRepository<Role> Role { get; set; }
