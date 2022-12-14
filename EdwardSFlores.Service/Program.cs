@@ -79,17 +79,22 @@ builder.Services.AddScoped<IUsersDataAccessService, UsersDataAccessService>();
 
 
 var app = builder.Build();
+// TODO: think about this
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     
 }
-// TODO: think about this
-app.UseSwagger();
-app.UseSwaggerUI();
+else
+{
+    app.UseHttpsRedirection();app.UseHttpsRedirection();
+}
 
-app.UseHttpsRedirection();
+
+
 
 app.UseAuthorization();
 

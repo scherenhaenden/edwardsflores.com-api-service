@@ -16,6 +16,7 @@ public class DataContextManagerSsh: IDataContextManager
 
     public DbContextEdward DbContextEdward { get; private set; }
     public IGenericUnitOfWork GenericUnityOfWork { get; private set; }
+    
     private static ILoadBalancer _loadBalancer;
     
     public DataContextManagerSsh(DbContextManagementModel dbContextManagementModel)
@@ -36,7 +37,7 @@ public class DataContextManagerSsh: IDataContextManager
             ForeignPort = dbContextManagementModel.TunnelingModel.ForeignPort,
             User = dbContextManagementModel.TunnelingModel.User,
             Password = dbContextManagementModel.TunnelingModel.Password,
-            ProtocolPort = dbContextManagementModel.TunnelingModel.ForeignPort,
+            ProtocolPort = dbContextManagementModel.TunnelingModel.ProtocolPort,
             CurrentProtocol = AvailableProtocols.Ssh
         };
         _loadBalancer = new LoadBalancer(loadBalancerConfiguration);
