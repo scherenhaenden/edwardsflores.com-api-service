@@ -55,7 +55,7 @@ public class DataContextManagerSsh: IDataContextManager
         {
             client.Connect();
 
-            var port = new ForwardedPortLocal("localhost", 3307, loadBalancerConfiguration.ForeignHost, 3306);
+            var port = new ForwardedPortLocal("127.0.0.1", 3307, loadBalancerConfiguration.ForeignHost, 3306);
             client.AddForwardedPort(port);
             
 
@@ -66,7 +66,10 @@ public class DataContextManagerSsh: IDataContextManager
             //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             try
             {
-                options2.UseMySql(connectionStringv, ServerVersion.AutoDetect(connectionStringv)/*, mySqlOptions =>
+                
+               
+                options2.UseMySql(connectionStringv, ServerVersion.AutoDetect(connectionStringv)
+                    /*, mySqlOptions =>
                         mySqlOptions.EnableRetryOnFailure(
                             maxRetryCount: 10,
                             maxRetryDelay: TimeSpan.FromSeconds(1),
@@ -81,7 +84,7 @@ public class DataContextManagerSsh: IDataContextManager
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                    throw;
             }
 
             

@@ -16,7 +16,7 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
             _context = context;
 
             Role = InitObjects<Role>();
-            User = InitObjects<User>();
+            Users = InitObjects<User>();
         }
     
         private  IRepository<T> InitObjects<T>()  where T : BaseEntity
@@ -25,7 +25,7 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
         }
 
         public IRepository<Role> Role { get; set; }
-        public IRepository<User> User { get; set; }
+        public IRepository<User> Users { get; set; }
         public bool Save()
         {
             var result = _context.SaveChanges();

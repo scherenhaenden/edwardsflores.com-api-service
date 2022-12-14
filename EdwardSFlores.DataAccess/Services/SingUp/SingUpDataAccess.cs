@@ -17,9 +17,9 @@ public class SingUpDataAccess: ISingUpDataAccess
     public Task<List<string>>? ProValidationSingUp(SingUpModelDataAccess singUpModel)
     {
         // check if username exists
-        var checkUserName =_genericUnitOfWork?.User?.Where(x => x.Password == singUpModel.Username)?.Any();
+        var checkUserName =_genericUnitOfWork?.Users?.Where(x => x.Password == singUpModel.Username)?.Any();
         // check if email exists
-        var checkEmail = _genericUnitOfWork?.User?.Where(x => x.Email == singUpModel.Email)?.Any();
+        var checkEmail = _genericUnitOfWork?.Users?.Where(x => x.Email == singUpModel.Email)?.Any();
         // check if password is valid
         // check if password and confirm password are the same
         
@@ -47,7 +47,7 @@ public class SingUpDataAccess: ISingUpDataAccess
     {
 
         // add new user
-        _genericUnitOfWork?.User?.Add(new User
+        _genericUnitOfWork?.Users?.Add(new User
         {
             Username = singUpModel.Username,
             Email = singUpModel.Email,

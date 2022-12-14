@@ -8,7 +8,7 @@ namespace EdwardSFlores.DataAccess.Database.Core.Unities
     {
         public IRepository<Role> Role { get; set; }
 
-        public IRepository<User> User { get; set; }
+        public IRepository<User> Users { get; set; }
 
         public bool Save();
     }

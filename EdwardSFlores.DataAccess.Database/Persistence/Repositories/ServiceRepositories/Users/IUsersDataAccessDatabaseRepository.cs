@@ -1,5 +1,6 @@
 using EdwardSFlores.DataAccess.Database.ContextManagement;
 using EdwardSFlores.DataAccess.Database.Core.Domain;
+using EdwardSFlores.DataAccess.Database.Core.Unities;
 using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
 using Renci.SshNet;
 
@@ -12,10 +13,12 @@ public interface IUsersDataAccessDatabaseRepository
 public class UsersDataAccessDatabaseRepository: GenericRepository<User>, IUsersDataAccessDatabaseRepository
 {
     private readonly DbContextEdward _dbContextEdward;
+    private readonly IGenericUnitOfWork _genericUnitOfWork;
     
     public UsersDataAccessDatabaseRepository(IDataContextManager dataContextManager): base(dataContextManager.DbContextEdward)
     {
         _dbContextEdward = dataContextManager.DbContextEdward;
+        _genericUnitOfWork = dataContextManager.GenericUnityOfWork;
     }
 
 
@@ -27,7 +30,7 @@ public class UsersDataAccessDatabaseRepository: GenericRepository<User>, IUsersD
     
     public List<User> GetAll()
     {
-        return _dbContextEdward.Users.ToList();
+        return _genericUnitOfWork.Users.GetAll().ToList();
     }
     
 
