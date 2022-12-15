@@ -67,8 +67,11 @@ fi
 
 #docker ps |grep edwardflores/service-beta | awk '{print $1}' | xargs docker stop
 
-#docker ps |grep edwardsfloresservice-web| awk '{print $3}'| xargs docker inspect 
+echo $(pwd)
 
+#docker ps |grep edwardsfloresservice-web| awk '{print $3}'| xargs docker inspect 
+cp ../appsettings.json ${OUTPUT_DIRECTORY}/appsettings.json 
+cp ../appsettings.json ./appsettings.json 
 
 docker-compose -f docker-compose.Beta.yml build
-docker-compose -f docker-compose.Beta.yml up -d 
+docker-compose -f docker-compose.Beta.yml up -d --force-recreate

@@ -4,16 +4,8 @@ EXPOSE 80
 EXPOSE 443
 
 # Install ping
-RUN apt-get -qq clean  
-RUN apt-get -qq update
-RUN apt-get -qq -y install apt-utils
-RUN apt-get -qq -y install dialog
-RUN apt-get -qq update
-RUN apt-get -qq -y install bash-completion --fix-missing
-RUN apt-get -qq -y install inetutils-ping net-tools 
 RUN export ASPNETCORE_ENVIRONMENT=Beta
-RUN apt-get -qq -y install default-mysql-client/stable
-RUN apt-get -qq -y install vim
+
 FROM base AS final
 WORKDIR /app
 COPY ./output/ /app/publish/ 
