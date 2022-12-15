@@ -11,11 +11,11 @@ RELEASE_DIRECTORY=release
 OUTPUT_DIRECTORY=output
 
 # check if container is running
-if [ "$(docker ps |grep ${CONTAINER_NAME} )" ]; then
+if [ "$(docker ps -a |grep ${CONTAINER_NAME} )" ]; then
     # stop container
     echo "stop container"
-    docker ps |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop 
-    docker ps |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker rm
+    docker ps -a |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop 
+    docker ps - a|grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker rm
 fi
 
 # check if container is running
@@ -73,8 +73,8 @@ echo $(pwd)
 cp ../appsettings.json ${OUTPUT_DIRECTORY}/appsettings.json 
 cp ../appsettings.json ./appsettings.json 
 
-#docker-compose -f docker-compose.Beta.yml build
-#docker-compose -f docker-compose.Beta.yml up -d --force-recreate
+docker-compose -f docker-compose.Beta.yml build --no-cache
+docker-compose -f docker-compose.Beta.yml up -d --force-recreate
 
-docker build -t ${CONTAINER_NAME} . -f Dockerfile.Beta
-docker run -it -d -p 15009:80 -p 15008:443 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME} -f Dockerfile.Beta
+#docker build -t ${CONTAINER_NAME} . -f Dockerfile.Beta
+#docker run -it -d -p 15009:80 -p 15008:443 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME} -f Dockerfile.Beta
