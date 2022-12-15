@@ -7,25 +7,25 @@ using EdwardSFlores.DataAccess.Database.Persistence.Repositories;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
 {
-    public class UnitOfWork: IUnitOfWork
+    public class GenericGenericUnitOfWork: IGenericUnitOfWork
     {
         private readonly DbContextEdward _context;
     
-        public UnitOfWork(DbContextEdward context)
+        public GenericGenericUnitOfWork(DbContextEdward context)
         {
             _context = context;
 
             Role = InitObjects<Role>();
-            User = InitObjects<User>();
+            Users = InitObjects<User>();
         }
     
         private  IRepository<T> InitObjects<T>()  where T : BaseEntity
         {
-            return  new Repository<T>(_context);
+            return  new GenericRepository<T>(_context);
         }
 
         public IRepository<Role> Role { get; set; }
-        public IRepository<User> User { get; set; }
+        public IRepository<User> Users { get; set; }
         public bool Save()
         {
             var result = _context.SaveChanges();

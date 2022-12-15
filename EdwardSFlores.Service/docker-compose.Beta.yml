@@ -16,9 +16,14 @@ services:
       - "host.docker.internal:host-gateway"
       
       
-    
-
-
-
-
       
+      
+      
+      
+      
+      
+
+networks:
+  my-private-ntwk:
+    external:
+      name: my_recipe_ntwk

@@ -3,6 +3,7 @@ using EdwardSFlores.DataAccess.Database.Core.Configuration;
 using EdwardSFlores.DataAccess.Database.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace EdwardSFlores.DataAccess.Database.Persistence.Configuration
 {
     [ExcludeFromCodeCoverage]
@@ -13,6 +14,7 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Configuration
             try
             {
                 base.Database.EnsureCreated();   
+                base.Database.OpenConnection();
             }catch(Exception ex)
             {
             
