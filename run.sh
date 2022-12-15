@@ -73,5 +73,8 @@ echo $(pwd)
 cp ../appsettings.json ${OUTPUT_DIRECTORY}/appsettings.json 
 cp ../appsettings.json ./appsettings.json 
 
-docker-compose -f docker-compose.Beta.yml build
-docker-compose -f docker-compose.Beta.yml up -d --force-recreate
+#docker-compose -f docker-compose.Beta.yml build
+#docker-compose -f docker-compose.Beta.yml up -d --force-recreate
+
+docker build -t ${CONTAINER_NAME} . -f Dockerfile.Beta
+docker run -it -d -p 15009:80 -p 15008:443 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME} -f Dockerfile.Beta
