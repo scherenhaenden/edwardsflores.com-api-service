@@ -15,7 +15,7 @@ if [ "$(docker ps -a |grep ${CONTAINER_NAME} )" ]; then
     # stop container
     echo "stop container"
     docker ps -a |grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker stop 
-    docker ps - a|grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker rm
+    docker ps -a|grep ${CONTAINER_NAME} | awk '{print $1}' | xargs docker rm
 fi
 
 # check if container is running
