@@ -1,22 +1,14 @@
-using System.Configuration;
-using System.Diagnostics;
-using EdwardSFlores.BusinessLogic.Services;
 using EdwardSFlores.BusinessLogic.Services.Login;
 using EdwardSFlores.BusinessLogic.Services.SingUp;
 using EdwardSFlores.BusinessLogic.Tools;
 using EdwardSFlores.DataAccess.Database.ContextManagement;
-using EdwardSFlores.DataAccess.Database.Core.Unities;
-using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
-using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Login;
 using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
-using EdwardSFlores.DataAccess.Database.Persistence.Unities;
+using EdwardSFlores.DataAccess.Services.Public.Users;
 using EdwardSFlores.DataAccess.Services.SingUp;
-using EdwardSFlores.DataAccess.Services.Users;
 using EdwardSFlores.Service.Configuration.ContextManager;
 //using EdwardSFlores.Service.Configuration.ContextManager;
 using EdwardSFlores.Service.Configuration.Core;
 using EdwardSFlores.Service.Configuration.Models;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
@@ -53,16 +45,12 @@ var database = localSettings.DataAccess.DataBases.Global.FirstOrDefault(x => x.C
 
 //builder.Services.AddSingleton<IServiceCollectionProvider>(new ServiceCollectionProvider(builder.Services));
 var result =new MapConfigToSshModel().Map(localSettings);
-//builder.Services.AddSingleton<IDataContextManager>(provider  => new DataContextManagerLocal(result));
-builder.Services.AddSingleton<IDataContextManager>(provider  => new DataContextManagerSsh(result));
+builder.Services.AddSingleton<IDataContextManager>(provider  => new DataContextManagerLocal(result));
+//builder.Services.AddSingleton<IDataContextManager>(provider  => new DataContextManagerSsh(result));
 
 // Add mysql context
 /*builder.Services.AddDbContext<DbContextEdward>(options =>
     options.UseMySQL(database.ConnectionString));*/
-
-
-
-builder.Services.AddScoped<ILogicDataAccessDatabaseRepositoryLogin, LogicDataAccessDatabaseGenericRepositoryLogin>();
 
 
 // Add service injection for the unity of work

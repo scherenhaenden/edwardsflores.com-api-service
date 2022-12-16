@@ -1,4 +1,4 @@
-namespace EdwardSFlores.DataAccess.Services.Login;
+namespace EdwardSFlores.DataAccess.Services.Public.Login;
 
 public class UserLoginOutputModel
 {

@@ -1,6 +1,5 @@
 using EdwardSFlores.Service.Controllers.V1.PublicApi;
 using EdwardSFlores.Service.Services.Security.Jwt;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EdwardSFlores.Service.Controllers.V1.PrivateApi;

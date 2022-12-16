@@ -25,7 +25,7 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
         }
 
         public IRepository<Role> Role { get; set; }
-        public IRepository<User> Users { get; set; }
+        public IRepository<User?> Users { get; set; }
         public bool Save()
         {
             var result = _context.SaveChanges();

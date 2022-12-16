@@ -1,7 +1,6 @@
-using EdwardSFlores.DataAccess.Database.Core.Unities;
-using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Login;
+using EdwardSFlores.DataAccess.Database.Persistence.Unities.ServiceUnities;
 
-namespace EdwardSFlores.DataAccess.Services.Login;
+namespace EdwardSFlores.DataAccess.Services.Public.Login;
 
 public interface ILoginDataAccess
 {
@@ -11,19 +10,18 @@ public interface ILoginDataAccess
 
 public class LoginDataAccess: ILoginDataAccess
 {
-    private readonly ILogicDataAccessDatabaseRepositoryLogin _logicDataAccessDatabaseRepositoryLogin;
-    
-
-    public LoginDataAccess(ILogicDataAccessDatabaseRepositoryLogin logicDataAccessDatabaseRepositoryLogin)
+    private readonly IPublicUserUnity _ipUserUnity;
+    public LoginDataAccess(IPublicUserUnity ipUserUnity)
     {
-        _logicDataAccessDatabaseRepositoryLogin = logicDataAccessDatabaseRepositoryLogin;
+        _ipUserUnity = ipUserUnity;
+ 
     }
     
     
     public UserLoginOutputModel? Login(string username, string password)
     {
         
-        var user = _logicDataAccessDatabaseRepositoryLogin.Login(username, password);
+        var user = _ipUserUnity.GetLoginAsync(username, password);
         
         if (user == null)
             return null;

@@ -2,13 +2,14 @@ using EdwardSFlores.DataAccess.Database.ContextManagement;
 using EdwardSFlores.DataAccess.Database.Core.Domain;
 using EdwardSFlores.DataAccess.Database.Core.Unities;
 using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
-using Renci.SshNet;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
 
 public interface IUsersDataAccessDatabaseRepository
 {
-    List<User> GetAll();
+    List<User?> GetAll();
+    
+    User? Login(string username, string password);
 }
 public class UsersDataAccessDatabaseRepository: GenericRepository<User>, IUsersDataAccessDatabaseRepository
 {
@@ -28,10 +29,24 @@ public class UsersDataAccessDatabaseRepository: GenericRepository<User>, IUsersD
     }
     
     
-    public List<User> GetAll()
+    public List<User?> GetAll()
     {
         return _genericUnitOfWork.Users.GetAll().ToList();
     }
-    
 
+    public User? Login(string username, string password)
+    {
+        
+        return _genericUnitOfWork?.Users?
+        
+            .Where(x => x.Username == username && x.Password == password)?
+            .Select(o =>
+                new User()
+                {
+                    Username = o.Username,
+                    Email = o.Email,
+                    UserRoles = o.UserRoles
+                })?
+            .FirstOrDefault();
+    }
 }

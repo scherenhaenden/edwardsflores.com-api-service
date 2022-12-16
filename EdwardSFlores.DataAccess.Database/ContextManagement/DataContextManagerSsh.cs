@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using TunnelConnector.Credentials;
 using TunnelConnector.LoadBalancer;
 using TunnelConnector.Protocls;
-using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Newtonsoft.Json;
 using Renci.SshNet;
 
 namespace EdwardSFlores.DataAccess.Database.ContextManagement;
@@ -42,6 +40,14 @@ public class DataContextManagerSsh: IDataContextManager
             ProtocolPort = dbContextManagementModel.TunnelingModel.ProtocolPort,
             CurrentProtocol = AvailableProtocols.Ssh
         };
+        
+        // obj to json
+        var json = JsonConvert.SerializeObject(loadBalancerConfiguration);
+        
+        // json to obj
+        var loadBalancerConfiguration2 = JsonConvert.DeserializeObject<LoadBalancerConfiguration>(json);
+        
+        
         _loadBalancer = new LoadBalancer(loadBalancerConfiguration);
         
         

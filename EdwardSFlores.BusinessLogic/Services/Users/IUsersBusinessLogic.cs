@@ -1,11 +1,11 @@
 using EdwardSFlores.DataAccess.Database.Core.Domain;
-using EdwardSFlores.DataAccess.Services.Users;
+using EdwardSFlores.DataAccess.Services.Public.Users;
 
 namespace EdwardSFlores.BusinessLogic.Services.Users;
 
 public interface IUsersBusinessLogic
 {
-    List<User> GetUsers();
+    List<User?> GetUsers();
 }
 
 public class UsersBusinessLogic : IUsersBusinessLogic
@@ -17,7 +17,7 @@ public class UsersBusinessLogic : IUsersBusinessLogic
         _usersRepository = usersRepository;
     }
 
-    public List<User> GetUsers()
+    public List<User?> GetUsers()
     {
         return _usersRepository.GetUsers();
     }

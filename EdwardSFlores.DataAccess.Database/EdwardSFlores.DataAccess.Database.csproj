@@ -9,7 +9,7 @@
     <ItemGroup>
       <Folder Include="Persistence\BaseDomain" />
       <Folder Include="Persistence\Domain" />
-      <Folder Include="Persistence\Unities\ServiceUnities" />
+      <Folder Include="Persistence\Repositories\ServiceRepositories\Login" />
     </ItemGroup>
 
     <ItemGroup>
@@ -21,6 +21,7 @@
       <PackageReference Include="MySql.Data" Version="8.0.31" />
       <PackageReference Include="MySql.Data.EntityFramework" Version="8.0.31" />
       <PackageReference Include="MySqlConnector" Version="2.2.2" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
       <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0-alpha.1" />
       <PackageReference Include="TunnelConnector" Version="0.6.0" />
     </ItemGroup>
