@@ -6,6 +6,10 @@ using TunnelConnector.Credentials;
 using TunnelConnector.LoadBalancer;
 using TunnelConnector.Protocls;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Renci.SshNet;
 
 namespace EdwardSFlores.DataAccess.Database.ContextManagement;
@@ -41,65 +45,12 @@ public class DataContextManagerSsh: IDataContextManager
             CurrentProtocol = AvailableProtocols.Ssh
         };
         
-        // obj to json
-        var json = JsonConvert.SerializeObject(loadBalancerConfiguration);
-        
-        // json to obj
-        var loadBalancerConfiguration2 = JsonConvert.DeserializeObject<LoadBalancerConfiguration>(json);
-        
-        
+        //loadBalancerConfiguration = JsonConvert.DeserializeObject<LoadBalancerConfiguration>(@"{""Localhost"":""localhost"",""LocalPorts"":[33060,33061,33062,33063],""ForeignHost"":""81.169.225.146"",""ForeignPort"":3306,""User"":""rockadm"",""Password"":""W9e5br~0"",""ProtocolPort"":22,""CurrentProtocol"":0}");
         _loadBalancer = new LoadBalancer(loadBalancerConfiguration);
-        
-        
-        
-        
-      
 
-  
-        
-        using (var client = new SshClient(loadBalancerConfiguration.ForeignHost, loadBalancerConfiguration.User, loadBalancerConfiguration.Password))
-        {
-            client.Connect();
 
-            var port = new ForwardedPortLocal("127.0.0.1", 3307, loadBalancerConfiguration.ForeignHost, 3306);
-            client.AddForwardedPort(port);
-            
 
-            port.Start();
-            
-            var connectionStringv = dbContextManagementModel.DbConnectionString.Replace("Port=3306", $"Port=3307");
-            var options2 = new DbContextOptionsBuilder<DbContextEdward>();
-            //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-            try
-            {
-                
-               
-                options2.UseMySql(connectionStringv, ServerVersion.AutoDetect(connectionStringv)
-                    /*, mySqlOptions =>
-                        mySqlOptions.EnableRetryOnFailure(
-                            maxRetryCount: 10,
-                            maxRetryDelay: TimeSpan.FromSeconds(1),
-                            errorNumbersToAdd: null)*/);
-                
-                
-                    // create db context
-                DbContextEdward = new DbContextEdward(options2.Options);
-                GenericUnityOfWork = new GenericGenericUnitOfWork(DbContextEdward);
-                return;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                    throw;
-            }
 
-            
-
-            //port.Stop();
-            //client.Disconnect();
-        }
-         
-        
         int portReplace;
         try
         {
