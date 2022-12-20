@@ -1,5 +1,6 @@
 using EdwardSFlores.DataAccess.Database.Persistence.Unities.ServiceUnities;
 using EdwardSFlores.DataAccess.Models;
+using EdwardSFlores.DataAccess.Services.Private.AdministrationOfApplication;
 
 namespace EdwardSFlores.DataAccess.Services.Public.Login;
 
@@ -23,7 +24,7 @@ public class LoginDataAccess: ILoginDataAccess
 
         var resultRoles = user.UserRoles.Select(x =>
 
-                new UserRoleOutputModel()
+                new RoleDataAccessModel()
                 {
                     Guid = x.Guid,
                     Name = x.Name

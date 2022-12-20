@@ -1,43 +1,39 @@
+using EdwardSFlores.DataAccess.Database.ContextManagement;
 using EdwardSFlores.DataAccess.Database.Core.Domain;
 using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
 using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
+using EdwardSFlores.DataAccess.Database.Security;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Unities.ServiceUnities;
 
-public class PublicUserUnity:GenericGenericUnitOfWork, IPublicUserUnity
+public class PublicUserUnity : GenericGenericUnitOfWork, IPublicUserUnity
 {
-    
-
-    public PublicUserUnity(DbContextEdward context) : base(context)
+    public PublicUserUnity(DbContextEdward context, IPasswordHasher passwordHasher) : base(context)
     {
-        UsersDataAccessDatabaseRepository = new UsersDataAccessDatabaseRepository(context);
+        Users = new UsersDataAccessDatabaseRepository(context, passwordHasher);
     }
     
-
-    public IUsersDataAccessDatabaseRepository UsersDataAccessDatabaseRepository { get; }
-
-    public User? GetLoginAsync(string username, string password)
+    public PublicUserUnity(IDataContextManager dataContextManager) : base(dataContextManager.DbContextEdward)
     {
-        var user = Users
-            .Where(x => x.Username == username && x.Password == password)
-            .Select(o =>
-                new User()
-                {
-                    Username = o.Username,
-                    Email = o.Email,
-                    UserRoles = o.UserRoles
-                })
-            .FirstOrDefault();
-        return user;
+        Role = new RolesDataAccessDatabase(dataContextManager);
+    }
+    
+    public PublicUserUnity(IDataContextManager dataContextManager, IPasswordHasher passwordHasher) : base(dataContextManager.DbContextEdward)
+    {
+        Users = new UsersDataAccessDatabaseRepository(dataContextManager.DbContextEdward,passwordHasher);
+        Jobs = new JobsStationsDataAccessDatabase(dataContextManager);
+        Technologies = new TechnologiesDataAccessDatabase(dataContextManager);
+        Role = new RolesDataAccessDatabase(dataContextManager);
     }
 
-    public List<User?>? GetAllUsers()
-    {
-        return UsersDataAccessDatabaseRepository.GetAll();
-    }
+    public IUsersDataAccessDatabaseRepository Users { get; private set; }
+    public IJobsStationsDataAccessDatabase Jobs { get; private set; }
+    
+    public ITechnologiesDataAccessDatabase Technologies { get; private set; }
+    
+    public IRolesDataAccessDatabase Role { get; private set; }
 
-    public User? GetUserById(Guid guid)
-    {
-        return Users?.GetByGuid(guid);
-    }
+
 }
+
+   

@@ -1,4 +1,4 @@
-namespace EdwardSFlores.DataAccess.Services.SingUp;
+namespace EdwardSFlores.DataAccess.Models;
 
 public class SingUpModelDataAccess 
 {

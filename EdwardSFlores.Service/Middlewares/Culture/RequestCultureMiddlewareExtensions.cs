@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace EdwardSFlores.Service.Middlewares;
+namespace EdwardSFlores.Service.Middlewares.Culture;
 
 public class RequestCultureMiddleware
 {

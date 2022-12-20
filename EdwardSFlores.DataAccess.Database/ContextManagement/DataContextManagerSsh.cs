@@ -1,4 +1,5 @@
 using EdwardSFlores.DataAccess.Database.Core.Unities;
+using EdwardSFlores.DataAccess.Database.Migrations;
 using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
 using EdwardSFlores.DataAccess.Database.Persistence.Unities;
 using Microsoft.EntityFrameworkCore;
@@ -63,6 +64,8 @@ public class DataContextManagerSsh: IDataContextManager
             //portReplace = LocalPorts[r];
         }
         var connectionString = dbContextManagementModel.DbConnectionString.Replace("Port=3306", $"Port={portReplace}");
+        
+        //new RunMigrations(connectionString);
         
         // create DbContextOptions<DbContextEdward> options
         var options = new DbContextOptionsBuilder<DbContextEdward>();
@@ -140,7 +143,7 @@ public class DataContextManagerLocal: IDataContextManager
 
     private void CreateContextWithSshTunneling(DbContextManagementModel dbContextManagementModel)
     {
-        
+        //new RunMigrations(dbContextManagementModel.DbConnectionString);
         // create DbContextOptions<DbContextEdward> options
         var options = new DbContextOptionsBuilder<DbContextEdward>();
         //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
@@ -154,8 +157,16 @@ public class DataContextManagerLocal: IDataContextManager
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            try
+            {
+                
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
+           
         }
 
             

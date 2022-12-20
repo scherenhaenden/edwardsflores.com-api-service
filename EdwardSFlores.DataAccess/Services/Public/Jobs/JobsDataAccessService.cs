@@ -1,18 +1,20 @@
+using EdwardSFlores.DataAccess.Models;
+
 namespace EdwardSFlores.DataAccess.Services.Public.Jobs;
 
 public class JobsDataAccessService: IJobsDataAccessService
 {
-    public List<JobDataAccess> GetJobs()
+    public List<JobDataAccessModel> GetJobs()
     {
         throw new NotImplementedException();
     }
 
-    public JobDataAccess GetJobById(Guid guid)
+    public JobDataAccessModel GetJobById(Guid guid)
     {
         throw new NotImplementedException();
     }
 
-    public JobDataAccess UpdateJob(JobDataAccess job)
+    public JobDataAccessModel UpdateJob(JobDataAccessModel job)
     {
         throw new NotImplementedException();
     }

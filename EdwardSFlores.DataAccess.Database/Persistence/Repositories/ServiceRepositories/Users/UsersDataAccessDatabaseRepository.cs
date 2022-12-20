@@ -33,6 +33,12 @@ public class UsersDataAccessDatabaseRepository: GenericRepository<User>, IUsersD
     {
         return _genericUnitOfWork.Users.GetAll().ToList();
     }
+    
+    public new User? Add(User user)
+    {
+        user.Password = _passwordHasher.HashPassword(user.Password);
+        return _genericUnitOfWork.Users.Add(user);
+    }
 
     public User? Login(string usernameOrEmail, string password)
     {
@@ -56,7 +62,8 @@ public class UsersDataAccessDatabaseRepository: GenericRepository<User>, IUsersD
                 {
                     Username = o.Username,
                     Email = o.Email,
-                    UserRoles = o.UserRoles
+                    UserRoles = o.UserRoles,
+                    Guid = o.Guid
                 })?
             .FirstOrDefault();
     }

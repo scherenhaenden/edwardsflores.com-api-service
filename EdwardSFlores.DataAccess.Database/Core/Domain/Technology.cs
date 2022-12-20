@@ -7,6 +7,11 @@ namespace EdwardSFlores.DataAccess.Database.Core.Domain;
 [Index(nameof(Name), IsUnique = true)]
 public class Technology : BaseEntity
 {
+    public Technology()
+    {
+        JobStations = new List<JobStation>();
+    }
+    
     [Required]
     public string Name { get; set; } = null!;
     
@@ -17,4 +22,6 @@ public class Technology : BaseEntity
     public string? Url { get; set; }
     
     public int? ExperienceLevel { get; set; }
+    
+    public virtual ICollection<JobStation>? JobStations { get; set; }
 }

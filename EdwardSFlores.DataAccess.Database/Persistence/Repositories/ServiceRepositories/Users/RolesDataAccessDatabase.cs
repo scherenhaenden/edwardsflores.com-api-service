@@ -5,7 +5,7 @@ using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
 
-public class RolesDataAccessDatabase : GenericRepository<Technology>, IRolesDataAccessDatabase
+public class RolesDataAccessDatabase : GenericRepository<Role>, IRolesDataAccessDatabase
 {
     private readonly DbContextEdward _dbContextEdward;
     private readonly IGenericUnitOfWork _genericUnitOfWork;
@@ -34,23 +34,5 @@ public class RolesDataAccessDatabase : GenericRepository<Technology>, IRolesData
     public List<Role> GetRoleListByGuids(List<Guid> guids)
     {
         return _genericUnitOfWork.Role.Where(x => guids.Contains(x.Guid)).ToList();
-    }
-
-    public Role UpdateRole(Role role)
-    {
-        _genericUnitOfWork.Role.Update(role);
-        _genericUnitOfWork.Save();
-        return role;
-    }
-
-    public void DeleteRole(Role role)
-    {
-        _genericUnitOfWork.Role.Remove(role);
-        _genericUnitOfWork.Save();
-    }
-
-    public Role AddRole(Role role)
-    {
-        throw new NotImplementedException();
     }
 }

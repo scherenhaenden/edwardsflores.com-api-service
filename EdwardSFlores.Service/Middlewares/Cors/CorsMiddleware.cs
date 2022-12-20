@@ -1,8 +1,6 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Http;
 
-namespace RockatuestiloCoreBack
+namespace EdwardSFlores.Service.Middlewares.Cors
 {
     public class CorsMiddleware
     {
@@ -16,7 +14,7 @@ namespace RockatuestiloCoreBack
         public Task Invoke(HttpContext httpContext)
         {
             
-            if (!httpContext.Request.Headers.ContainsKey(CorsConstants.Origin)) return this._next(httpContext);
+            if (!httpContext.Request.Headers.ContainsKey(CorsConstants.Origin)) return _next(httpContext);
 
             httpContext.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:4200/");
             httpContext.Response.Headers.Add("Access-Control-Allow-Credentials", "true");

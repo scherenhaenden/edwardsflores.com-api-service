@@ -1,28 +1,16 @@
-using EdwardSFlores.DataAccess.Database.Core.Domain;
-using EdwardSFlores.DataAccess.Database.Persistence.Unities.ServiceUnities;
+using EdwardSFlores.DataAccess.Models;
+using EdwardSFlores.DataAccess.Services.Public.Login;
 
 namespace EdwardSFlores.DataAccess.Services.Public.Users;
 
 public interface IUsersDataAccessService
 {
-    List<User?>? GetUsers();
-
-}
-
-public class UsersDataAccessService: IUsersDataAccessService
-{
-    private readonly IPublicUserUnity _publicUserUnity;
-
-
-    public UsersDataAccessService(IPublicUserUnity publicUserUnity)
-
-    {
-        _publicUserUnity = publicUserUnity;
-    }
+    List<UserDataAccessOutputModel?>? GetUsers();
     
+    UserDataAccessOutputModel? GetUserById(Guid id);
     
-    public List<User?>? GetUsers()
-    {
-        return _publicUserUnity.GetAllUsers();
-    }
+    UserDataAccessOutputModel? Login(string email, string password);
+    
+    bool NewPassword(string userOrEmail, string password);
+
 }

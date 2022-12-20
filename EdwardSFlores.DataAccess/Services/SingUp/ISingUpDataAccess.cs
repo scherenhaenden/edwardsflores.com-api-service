@@ -1,3 +1,5 @@
+using EdwardSFlores.DataAccess.Models;
+
 namespace EdwardSFlores.DataAccess.Services.SingUp;
 
 public interface ISingUpDataAccess
@@ -6,14 +8,6 @@ public interface ISingUpDataAccess
     Task<List<string>> ProValidationSingUp(SingUpModelDataAccess singUpModel);
     
     Task<bool> SingUp(SingUpModelDataAccess singUpModel);
-}
-
-public class SingUpModelDataAccess 
-{
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public string Email { get; set; }
-    
 }
 
 

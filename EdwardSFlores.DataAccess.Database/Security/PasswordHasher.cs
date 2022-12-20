@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace EdwardSFlores.BusinessLogic.Tools;
+namespace EdwardSFlores.DataAccess.Database.Security;
 
 public class PasswordHasher : IPasswordHasher
 {
@@ -39,10 +39,7 @@ public class PasswordHasher : IPasswordHasher
     public bool VerifyHashedPassword(string hashedPassword, string providedPassword)
     {
         // convert string to base64
-        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(hashedPassword);
-        var rehasshed = System.Convert.ToBase64String(plainTextBytes);
-        
-        byte[] hashedPasswordBytes = Convert.FromBase64String(rehasshed);
+        byte[] hashedPasswordBytes = Convert.FromBase64String(hashedPassword);
         if (hashedPasswordBytes.Length != _options.HashSize + _options.SaltSize)
         {
             return false;
@@ -59,6 +56,10 @@ public class PasswordHasher : IPasswordHasher
             providedHashBytes = keyDerivation.GetBytes(_options.HashSize);
         }
 
-        return hashBytes.SequenceEqual(providedHashBytes);
+        return ByteArrayCompare(hashBytes, providedHashBytes);
+    }
+    static bool ByteArrayCompare(ReadOnlySpan<byte> a1, ReadOnlySpan<byte> a2)
+    {
+        return a1.SequenceEqual(a2);
     }
 }

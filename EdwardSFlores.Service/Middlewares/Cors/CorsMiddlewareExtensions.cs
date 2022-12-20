@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Builder;
+using EdwardSFlores.Service.Configuration.Models;
 
-namespace RockatuestiloCoreBack
+namespace EdwardSFlores.Service.Middlewares.Cors
 {
     public static class CorsMiddlewareExtensions
     {
@@ -9,4 +9,13 @@ namespace RockatuestiloCoreBack
             return builder.UseMiddleware<CorsMiddleware>();
         }
     }
+    
+    /*public static class DataContextManagerExtensions
+    {
+        public static IApplicationBuilder UseDataContextManagerV1Middleware(this IApplicationBuilder builder, ConfigurationOfApplication configuration)
+        {
+            return builder.UseMiddleware<DataContextManagerV1Middleware>(configuration);
+        }
+        
+    }*/
 }

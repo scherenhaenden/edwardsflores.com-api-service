@@ -8,6 +8,10 @@ namespace EdwardSFlores.DataAccess.Database.Core.Unities
         public IRepository<Role> Role { get; set; }
 
         public IRepository<User?> Users { get; set; }
+        
+        public IRepository<JobStation> JobStations { get; set; }
+        
+        public IRepository<Technology> Technologies { get; set; }
 
         public bool Save();
     }

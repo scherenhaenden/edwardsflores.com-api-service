@@ -8,24 +8,68 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace EdwardSFlores.Service.Chaos;
 
-public class JwtManagement: IJwtManagement
+public class JwtManagementService: IJwtManagementService
 {
-    public string CreateToken(JwtCreatorModel jwtCreatorModel)
+    
+    public string CreateToken(JwtCreatorModelV2 jwtCreatorModelV2)
     {
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.NameId, jwtCreatorModel.UserId),
-            new Claim(JwtRegisteredClaimNames.UniqueName, jwtCreatorModel.UserName),
-            new Claim(JwtRegisteredClaimNames.Iss, jwtCreatorModel.Issuer),
-            new Claim(JwtRegisteredClaimNames.Aud, jwtCreatorModel.Audience),
-            new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(jwtCreatorModel.ExpireMinutes).ToString(CultureInfo.InvariantCulture))
+            new Claim(JwtRegisteredClaimNames.NameId, jwtCreatorModelV2.UserId),
+            new Claim(JwtRegisteredClaimNames.UniqueName, jwtCreatorModelV2.UserName),
+            new Claim(JwtRegisteredClaimNames.Iss, jwtCreatorModelV2.Issuer),
+            new Claim(JwtRegisteredClaimNames.Aud, jwtCreatorModelV2.Audience),
+            new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(jwtCreatorModelV2.ExpireMinutes).ToString(CultureInfo.InvariantCulture))
+            
+        };
+
+        foreach (var VARIABLE in jwtCreatorModelV2.Claims)
+        {
+            claims.Add(new Claim(VARIABLE.Key, VARIABLE.Value));
+
+        }
+        
+        foreach (var VARIABLE in jwtCreatorModelV2.Roles)
+        {
+            claims.Add(new Claim(VARIABLE.Key, VARIABLE.Value));
+
+        }
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtCreatorModelV2.Secret));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+        
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(claims),
+            Expires = DateTime.Now.AddDays(7),
+            SigningCredentials = creds
+        };
+        
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+
+        return tokenHandler.WriteToken(token);
+    }
+    
+    
+    
+    public string CreateToken(JwtCreatorModelV1 jwtCreatorModelV1)
+    {
+        var claims = new List<Claim>
+        {
+            new Claim(JwtRegisteredClaimNames.NameId, jwtCreatorModelV1.UserId),
+            new Claim(JwtRegisteredClaimNames.UniqueName, jwtCreatorModelV1.UserName),
+            new Claim(JwtRegisteredClaimNames.Iss, jwtCreatorModelV1.Issuer),
+            new Claim(JwtRegisteredClaimNames.Aud, jwtCreatorModelV1.Audience),
+            new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(jwtCreatorModelV1.ExpireMinutes).ToString(CultureInfo.InvariantCulture))
             
         };
         
-        claims.AddRange(jwtCreatorModel.Claims?.Select(claim => new Claim(claim, claim)));
-        claims.AddRange(jwtCreatorModel.Roles?.Select(role => new Claim(ClaimTypes.Role, role)));
+        claims.AddRange(jwtCreatorModelV1.Claims?.Select(claim => new Claim(claim, claim)));
+        claims.AddRange(jwtCreatorModelV1.Claims?.Select(claim => new Claim("token", claim)));
+        claims.AddRange(jwtCreatorModelV1.Roles?.Select(role => new Claim(ClaimTypes.Role, role)));
         
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key"));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtCreatorModelV1.Secret));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
         
         var tokenDescriptor = new SecurityTokenDescriptor
@@ -43,7 +87,98 @@ public class JwtManagement: IJwtManagement
         
     }
 
-    public Guid? ValidateToken(string token)
+    public Guid? ValidateToken(string token, string keyRaw)
+    {
+        // validate token
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(keyRaw);
+        
+        // craete SignatureValidator
+        //var signatureValidator = new SignatureValidator(Encoding.UTF8.GetBytes(jwtCreatorModel.Secret));
+        
+        
+        tokenHandler.ValidateToken(token, new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            //SignatureValidator = signatureValidator
+            
+        }, out var validatedToken);
+        
+        var jwtToken = (JwtSecurityToken)validatedToken;
+        var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "nameid").Value);
+        return userId;
+
+    }
+
+    public void SetTokenIntoCookie(string token)
+    {
+        throw new NotImplementedException();
+    }
+
+    public string GetTokenFromCookie()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RemoveTokenFromCookie()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetTokenIntoHeader(string token)
+    {
+        throw new NotImplementedException();
+    }
+
+    public string GetTokenFromHeader()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RevokeToken(string token)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RevokeAllUserTokens(Guid userId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetTokenAsUsed(string token)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetAllUserTokensAsUsed(Guid userId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetTokenAsRevoked(string token)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetAllUserTokensAsRevoked(Guid userId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetTokenAsExpired(string token)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetAllUserTokensAsExpired(Guid userId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetTokenAsNotUsed(string token)
     {
         throw new NotImplementedException();
     }

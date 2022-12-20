@@ -3,7 +3,7 @@ using EdwardSFlores.DataAccess.Database.Core.Repositories;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
 
-public interface IRolesDataAccessDatabase : IRepository<Technology>
+public interface IRolesDataAccessDatabase : IRepository<Role>
 {
     // Get all roles
     List<Role> GetRoles();
@@ -16,13 +16,4 @@ public interface IRolesDataAccessDatabase : IRepository<Technology>
     
     // Get role list by list of guids
     List<Role> GetRoleListByGuids(List<Guid> guids);
-    
-    // Update role
-    Role UpdateRole(Role role);
-    
-    // Delete role
-    void DeleteRole(Role role);
-    
-    // Add role
-    Role AddRole(Role role);
 }

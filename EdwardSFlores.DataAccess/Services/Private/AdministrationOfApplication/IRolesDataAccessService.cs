@@ -1,0 +1,29 @@
+using EdwardSFlores.DataAccess.Database.Core.Domain;
+using EdwardSFlores.DataAccess.Services.Public.Jobs;
+using EdwardSFlores.DataAccess.Services.Public.Login;
+
+namespace EdwardSFlores.DataAccess.Services.Private.AdministrationOfApplication;
+
+public interface IRolesDataAccessService
+{
+    // Get all roles
+    List<RoleDataAccessModel> GetRoles();
+    
+    // Get role by guids
+    RoleDataAccessModel? GetRoleByGuid(Guid guid);
+    
+    // Get role by name
+    RoleDataAccessModel? GetRoleByName(string name);
+    
+    // Get role list by list of guids
+    List<RoleDataAccessModel> GetRoleListByGuids(List<Guid> guids);
+    
+    // Update role
+    RoleDataAccessModel UpdateRole(RoleDataAccessModel role);
+    
+    // Delete role
+    void DeleteRole(RoleDataAccessModel role);
+    
+    // Add role
+    RoleDataAccessModel AddRole(RoleDataAccessModel role);
+}

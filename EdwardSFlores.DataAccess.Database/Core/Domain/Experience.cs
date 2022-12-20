@@ -1,6 +1,8 @@
+using EdwardSFlores.DataAccess.Database.Core.BaseDomain;
+
 namespace EdwardSFlores.DataAccess.Database.Core.Domain;
 
-public class Experience
+public class Experience : BaseEntity
 {
     
 }

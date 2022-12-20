@@ -1,14 +1,16 @@
 using EdwardSFlores.DataAccess.Database.Core.Domain;
+using EdwardSFlores.DataAccess.Database.Core.Unities;
 using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Unities.ServiceUnities;
 
-public interface IPublicUserUnity
+public interface IPublicUserUnity: IGenericUnitOfWork
 {
-    IUsersDataAccessDatabaseRepository UsersDataAccessDatabaseRepository { get; }
-    User? GetLoginAsync(string username, string password);
-
-    List<User?>? GetAllUsers();
+    public IUsersDataAccessDatabaseRepository Users { get;  }
+    public IJobsStationsDataAccessDatabase Jobs { get; }
     
-    User? GetUserById(Guid guid);
+    public ITechnologiesDataAccessDatabase Technologies { get; }
+    
+    public IRolesDataAccessDatabase Role { get; }
+
 }

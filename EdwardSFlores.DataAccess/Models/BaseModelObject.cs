@@ -1,4 +1,4 @@
-namespace EdwardSFlores.DataAccess.Services.Public.Jobs;
+namespace EdwardSFlores.DataAccess.Models;
 
 public class BaseModelObject
 {
