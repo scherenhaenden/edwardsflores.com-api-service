@@ -4,14 +4,6 @@ using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceReposito
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Unities.ServiceUnities;
 
-public interface IPublicUserUnity
-{
-    IUsersDataAccessDatabaseRepository UsersDataAccessDatabaseRepository { get; }
-    User? GetLoginAsync(string username, string password);
-
-    List<User?>? GetAllUsers();
-}
-
 public class PublicUserUnity:GenericGenericUnitOfWork, IPublicUserUnity
 {
     
@@ -31,9 +23,9 @@ public class PublicUserUnity:GenericGenericUnitOfWork, IPublicUserUnity
             .Select(o =>
                 new User()
                 {
-                   Username = o.Username,
-                   Email = o.Email,
-                   UserRoles = o.UserRoles
+                    Username = o.Username,
+                    Email = o.Email,
+                    UserRoles = o.UserRoles
                 })
             .FirstOrDefault();
         return user;
@@ -41,6 +33,11 @@ public class PublicUserUnity:GenericGenericUnitOfWork, IPublicUserUnity
 
     public List<User?>? GetAllUsers()
     {
-        return Users?.GetAll()?.ToList();
+        return UsersDataAccessDatabaseRepository.GetAll();
+    }
+
+    public User? GetUserById(Guid guid)
+    {
+        return Users?.GetByGuid(guid);
     }
 }

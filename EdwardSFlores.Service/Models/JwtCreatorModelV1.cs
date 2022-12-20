@@ -23,3 +23,4 @@ public class JwtCreatorModel
     public string[]? Claims { get; private set; }
     public string[]? Roles { get; private set; }
 }
+

@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace EdwardSFlores.Service.Chaos;
 
-public class JwtGenerator: IJwtGenerator
+public class JwtManagement: IJwtManagement
 {
     public string CreateToken(JwtCreatorModel jwtCreatorModel)
     {
@@ -42,8 +42,13 @@ public class JwtGenerator: IJwtGenerator
         
         
     }
-    
-    
+
+    public Guid? ValidateToken(string token)
+    {
+        throw new NotImplementedException();
+    }
+
+
     /*private string generateJwtToken(string email, AppUser user)
     {
         var claims = new List<Claim>

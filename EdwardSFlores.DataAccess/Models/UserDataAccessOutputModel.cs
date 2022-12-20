@@ -1,6 +1,6 @@
 namespace EdwardSFlores.DataAccess.Services.Public.Login;
 
-public class UserLoginOutputModel
+public class UserDataAccessOutputModel
 {
     public Guid Guid { get; set; }
     public string Username { get; set; }
