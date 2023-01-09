@@ -6,8 +6,9 @@ namespace EdwardSFlores.DataAccess.Services.Private.AdministrationOfApplication;
 
 public interface IRolesDataAccessService
 {
-    // Get all roles
-    List<RoleDataAccessModel> GetRoles();
+
+    // Get all roles with pagination
+    List<RoleDataAccessModel> GetRoles(int page, int pageSize);
     
     // Get role by guids
     RoleDataAccessModel? GetRoleByGuid(Guid guid);

@@ -1,6 +1,6 @@
 namespace EdwardSFlores.BusinessLogic.Services.Administration.Roles;
 
-public class UserBusinessModel : BaseBusinessModelObject
+public class UserBusinessModel : BaseBusinessModel
 {
     public Guid Guid { get; set; }
     public string Username { get; set; }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 namespace EdwardSFlores.Service.Controllers.V1.PrivateApi;
 
 [ApiController]
-[Route("/v1/public-api/[controller]")]
+[Route("/v1/private-api/[controller]")]
 public class AdminRolesController : Controller
 {
     private readonly IRolesBusinessLogic _rolesBusinessLogic;
@@ -20,11 +20,12 @@ public class AdminRolesController : Controller
     [AuthorizeViaJwtV1]
     [HttpGet]
     [Route("get-roles")]
-    public IActionResult GetRoles()
+    public IActionResult GetRoles(int page=1, int pageSize=10)
     {
-        return Ok(_rolesBusinessLogic.GetRoles());
+        var roles = _rolesBusinessLogic.GetRoles(page, pageSize);
+        return Ok(roles);
     }
-    
+
     [AuthorizeViaJwtV1]
     [HttpPost]
     [Route("create-role")]

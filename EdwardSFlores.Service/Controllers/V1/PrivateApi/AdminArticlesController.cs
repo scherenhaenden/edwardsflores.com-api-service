@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EdwardSFlores.Service.Controllers.V1.PrivateApi;
 
 [ApiController]
-[Route("/v1/public-api/[controller]")]
+[Route("/v1/private-api/[controller]")]
 public class AdminArticlesController : Controller
 {
     [AuthorizeViaJwtV1]

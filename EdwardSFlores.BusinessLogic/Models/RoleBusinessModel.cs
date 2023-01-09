@@ -1,6 +1,6 @@
 namespace EdwardSFlores.BusinessLogic.Services.Administration.Roles;
 
-public class RoleBusinessModel: BaseBusinessModelObject
+public class RoleBusinessModel: BaseBusinessModel
 {
 
     public string Name { get; set; } = string.Empty;

@@ -12,6 +12,15 @@ namespace EdwardSFlores.DataAccess.Database.Core.Unities
         public IRepository<JobStation> JobStations { get; set; }
         
         public IRepository<Technology> Technologies { get; set; }
+        
+        // Organization
+        public IRepository<Organization> Organizations { get; set; }
+        
+        // Project
+        public IRepository<Project> Projects { get; set; }
+        
+        // Token
+        public IRepository<Token> Tokens { get; set; }
 
         public bool Save();
     }

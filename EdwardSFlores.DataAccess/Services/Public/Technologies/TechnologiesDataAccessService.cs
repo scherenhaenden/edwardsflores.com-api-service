@@ -54,6 +54,7 @@ public class TechnologiesDataAccessService : ITechnologiesDataAccessService
         var obj = JsonConvert.DeserializeObject<Technology>(json);
 
         var result = _publicUserUnity.Technologies.Add(obj);
+        _publicUserUnity.Save();
         
         // obj to json
         json = JsonConvert.SerializeObject(result);

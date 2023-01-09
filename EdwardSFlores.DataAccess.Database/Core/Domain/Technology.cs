@@ -24,4 +24,5 @@ public class Technology : BaseEntity
     public int? ExperienceLevel { get; set; }
     
     public virtual ICollection<JobStation>? JobStations { get; set; }
+
 }

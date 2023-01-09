@@ -14,7 +14,5 @@ public class Article: BaseEntity
     [StringLength(15000)]
     public string Content { get; set; } = null!;
     public DateTime PublicationDate { get; set; }
-    
-    
     public virtual User Author { get; set; }
 }

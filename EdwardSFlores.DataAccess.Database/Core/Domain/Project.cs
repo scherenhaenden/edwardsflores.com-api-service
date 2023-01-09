@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EdwardSFlores.DataAccess.Database.Core.Domain;
 
 [Index(nameof(Name), IsUnique = true)]
-public class Projects : BaseEntity
+public class Project : BaseEntity
 {
     [Required]
     public string Name { get; set; } = null!;

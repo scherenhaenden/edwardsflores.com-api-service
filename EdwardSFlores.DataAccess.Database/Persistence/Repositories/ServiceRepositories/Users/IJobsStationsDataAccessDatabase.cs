@@ -5,7 +5,8 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepo
 
 public interface IJobsStationsDataAccessDatabase : IRepository<JobStation>
 {
-    public List<JobStation> GetJobs();
+    // get jobs by pagination
+    public List<JobStation> GetJobs(int page, int pageSize);
 
 
     public JobStation? GetJobById(Guid guid);

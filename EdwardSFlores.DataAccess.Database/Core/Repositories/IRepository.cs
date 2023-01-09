@@ -7,6 +7,10 @@ namespace EdwardSFlores.DataAccess.Database.Core.Repositories
     public interface IRepository<TEntity> where TEntity : BaseEntity, IBaseEntity
     {
         public IQueryable<TEntity> GetAll();
+        
+        // get all with pagination
+        public IQueryable<TEntity> GetAll(int page, int pageSize);
+        
         TEntity? GetByGuid(Guid id);
         Task<TEntity?> GetByGuidAsync(Guid guid, CancellationToken cancellationToken = default);
         TEntity Add(TEntity entity);

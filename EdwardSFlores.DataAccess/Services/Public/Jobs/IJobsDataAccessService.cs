@@ -4,8 +4,9 @@ namespace EdwardSFlores.DataAccess.Services.Public.Jobs;
 
 public interface IJobsDataAccessService
 {
-    // get list with all jobs
-    List<JobDataAccessModel> GetJobs();
+
+    // get list with with pagination
+    List<JobDataAccessModel> GetJobs(int page, int pageSize);
     
     // get job by guid
     JobDataAccessModel GetJobById(Guid guid);

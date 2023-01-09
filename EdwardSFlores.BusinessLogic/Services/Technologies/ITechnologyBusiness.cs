@@ -1,4 +1,6 @@
+using EdwardSFlores.BusinessLogic.Models;
 using EdwardSFlores.DataAccess.Models;
+using EdwardSFlores.DataAccess.Services.Private.AdministrationOfApplication;
 using EdwardSFlores.DataAccess.Services.Public.Jobs;
 using EdwardSFlores.DataAccess.Services.Public.Technologies;
 using Newtonsoft.Json;
@@ -8,10 +10,17 @@ namespace EdwardSFlores.BusinessLogic.Services.Technologies;
 public interface ITechnologyBusiness
 {
     // get all technologies
-    List<TechnologyBusinessModelBusiness> GetTechnologies();
+    List<TechnologyBusinessModel> GetTechnologies();
     
     // Add technology
-    TechnologyBusinessModelBusiness AddTechnology(TechnologyBusinessModelBusiness technology);
+    TechnologyBusinessModel AddTechnology(TechnologyBusinessModel technology);
+    
+    // Update technology
+    TechnologyBusinessModel UpdateTechnology(TechnologyBusinessModel technology);
+    
+    // Delete technology by guid
+    bool DeleteTechnology(Guid id);
+    
     
 }
 
@@ -26,61 +35,42 @@ public class TechnologyBusiness : ITechnologyBusiness
         
     }
     
-    public List<TechnologyBusinessModelBusiness> GetTechnologies()
+    public List<TechnologyBusinessModel> GetTechnologies()
     {
-        
-        var obj = _technologiesDataAccessService.GetAllTechnologies();
-        // obj to json
-        var json = JsonConvert.SerializeObject(obj);
-        
-        // json to obj
-        var obj2 = JsonConvert.DeserializeObject<List<TechnologyBusinessModelBusiness>>(json);
-        
-        return obj2;
-        
+        //var roles = _rolesDataAccessService.GetRoles();
+        //return roles.MapObjToObj<List<RoleBusinessModel>>();
+        var allTechnologies = _technologiesDataAccessService.GetAllTechnologies();
+
+        return allTechnologies.MapObjToObj<List<TechnologyBusinessModel>>();
+    }
+
+    public TechnologyBusinessModel AddTechnology(TechnologyBusinessModel technology)
+    {
+        var obj2 = technology.MapObjToObj<TechnologyDataAccessModel>();
+
+        var result = _technologiesDataAccessService.AddTechnology(obj2);
+
+        technology = result.MapObjToObj<TechnologyBusinessModel>();
+
+        return technology;
         
     }
 
-    public TechnologyBusinessModelBusiness AddTechnology(TechnologyBusinessModelBusiness technology)
+    public TechnologyBusinessModel UpdateTechnology(TechnologyBusinessModel technology)
     {
-        // obj to json
-        var json = JsonConvert.SerializeObject(technology);
-        
-        // json to obj
-        var obj2 = JsonConvert.DeserializeObject<TechnologyDataAccessModel>(json);
-        
-        var result = _technologiesDataAccessService.AddTechnology(obj2);
-        
-        // obj to json
-        var json2 = JsonConvert.SerializeObject(result);
-        
-        // json to obj
-        var obj3 = JsonConvert.DeserializeObject<TechnologyBusinessModelBusiness>(json2);
-        
-        return obj3;
-        
+        var obj2 = technology.MapObjToObj<TechnologyDataAccessModel>();
+
+        var result = _technologiesDataAccessService.UpdateTechnology(obj2);
+
+        technology = result.MapObjToObj<TechnologyBusinessModel>();
+
+        return technology;
+    }
+
+    public bool DeleteTechnology(Guid id)
+    {
+        return _technologiesDataAccessService.DeleteTechnologyByGuid(id);
     }
 }
 
 //
-
-public class TechnologyBusinessModelBusiness : BaseModelBusinessObject
-{
-    public string Name { get; set; } = null!;
-    
-    public string? Description { get; set; }
-    
-    public string? Image { get; set; }
-    
-    public string? Url { get; set; }
-    
-    public int? ExperienceLevel { get; set; }
-}
-
-public class BaseModelBusinessObject
-{
-    public Guid Guid { get; set; }
-    public DateTime InsertedDate { get; set; }
-    public DateTime UpdatedDate { get; set; }
-    public bool IsActive { get; set; } 
-}

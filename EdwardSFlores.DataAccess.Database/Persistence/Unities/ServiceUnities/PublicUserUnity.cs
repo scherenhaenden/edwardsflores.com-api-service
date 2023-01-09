@@ -16,14 +16,15 @@ public class PublicUserUnity : GenericGenericUnitOfWork, IPublicUserUnity
     public PublicUserUnity(IDataContextManager dataContextManager) : base(dataContextManager.DbContextEdward)
     {
         Role = new RolesDataAccessDatabase(dataContextManager);
+        Jobs = new JobsStationsDataAccessDatabase(dataContextManager);
+        Technologies = new TechnologiesDataAccessDatabase(dataContextManager);
+        Role = new RolesDataAccessDatabase(dataContextManager);
     }
     
     public PublicUserUnity(IDataContextManager dataContextManager, IPasswordHasher passwordHasher) : base(dataContextManager.DbContextEdward)
     {
         Users = new UsersDataAccessDatabaseRepository(dataContextManager.DbContextEdward,passwordHasher);
-        Jobs = new JobsStationsDataAccessDatabase(dataContextManager);
-        Technologies = new TechnologiesDataAccessDatabase(dataContextManager);
-        Role = new RolesDataAccessDatabase(dataContextManager);
+        
     }
 
     public IUsersDataAccessDatabaseRepository Users { get; private set; }

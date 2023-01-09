@@ -7,6 +7,7 @@ using EdwardSFlores.DataAccess.Database.ContextManagement;
 using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
 using EdwardSFlores.DataAccess.Database.Security;
 using EdwardSFlores.DataAccess.Services.Private.AdministrationOfApplication;
+using EdwardSFlores.DataAccess.Services.Public.Jobs;
 using EdwardSFlores.DataAccess.Services.Public.Technologies;
 using EdwardSFlores.DataAccess.Services.Public.Users;
 using EdwardSFlores.DataAccess.Services.SingUp;
@@ -109,6 +110,13 @@ builder.Services.AddScoped<ITechnologyBusiness, TechnologyBusiness>();
 builder.Services.AddScoped<IRolesDataAccessDatabase, RolesDataAccessDatabase>();
 builder.Services.AddScoped<IRolesDataAccessService, RolesDataAccessService>();
 builder.Services.AddScoped<IRolesBusinessLogic, RolesBusinessLogic>();
+
+
+
+builder.Services.AddScoped<IJobsStationsDataAccessDatabase, JobsStationsDataAccessDatabase>();
+builder.Services.AddScoped<IJobsStationsAdministrationDataAccess, JobsStationsAdministrationDataAccess>();
+
+builder.Services.AddScoped<IJobsStationsBusinessService, JobsStationsBusinessService>();
     
 
 var app = builder.Build();

@@ -1,6 +1,6 @@
 namespace EdwardSFlores.BusinessLogic.Services.Administration.Roles;
 
-public class BaseBusinessModelObject
+public class BaseBusinessModel
 {
     public Guid Guid { get; set; }
     public DateTime InsertedDate { get; set; }

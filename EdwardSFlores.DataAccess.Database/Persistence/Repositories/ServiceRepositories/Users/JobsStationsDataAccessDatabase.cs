@@ -18,9 +18,11 @@ public class JobsStationsDataAccessDatabase: GenericRepository<JobStation>, IJob
         _genericUnitOfWork = dataContextManager.GenericUnityOfWork;
     }
 
-    public List<JobStation> GetJobs()
+    
+
+    public List<JobStation> GetJobs(int page, int pageSize)
     {
-        return _genericUnitOfWork.JobStations.GetAll().ToList();
+        return _genericUnitOfWork.JobStations.GetAll(page, pageSize).ToList();
     }
 
     public JobStation? GetJobById(Guid guid)

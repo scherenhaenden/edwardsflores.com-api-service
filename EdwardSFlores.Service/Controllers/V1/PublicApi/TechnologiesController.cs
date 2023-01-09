@@ -1,3 +1,4 @@
+using EdwardSFlores.BusinessLogic.Models;
 using EdwardSFlores.BusinessLogic.Services.Technologies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ public class TechnologiesController : Controller
     [AllowAnonymous]
     [HttpGet]
     [Route("add-tech")]
-    public IActionResult Get(TechnologyBusinessModelBusiness model)
+    public IActionResult Get(TechnologyBusinessModel model)
     {
         return Ok(_technologyBusiness.AddTechnology(model));
     }

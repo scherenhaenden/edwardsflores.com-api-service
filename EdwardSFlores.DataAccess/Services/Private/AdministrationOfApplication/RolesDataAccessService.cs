@@ -6,31 +6,6 @@ using Newtonsoft.Json;
 
 namespace EdwardSFlores.DataAccess.Services.Private.AdministrationOfApplication;
 
-
-public static class GenericJsonMapper
-{
-    public static string MapToJson<T>(this T entity) where T : class
-    {
-        return JsonConvert.SerializeObject(entity);
-    }
-
-    public static T MapFromJson<T>(this string json) where T : class
-    {
-        return JsonConvert.DeserializeObject<T>(json);
-    }
-
-    public static Tout MapObjToObj<Tout>(this object obj) where Tout : class
-    {
-
-
-        var json = JsonConvert.SerializeObject(obj);
-
-        return JsonConvert.DeserializeObject<Tout>(json);
-    }
-
-
-} 
-
 public static class RoleDataAccessModelMapper 
 {
     public static RoleDataAccessModel MapToRoleDataAccessModel(this Role roleServiceModel)
@@ -95,9 +70,9 @@ public class RolesDataAccessService: IRolesDataAccessService
     }
 
 
-    public List<RoleDataAccessModel> GetRoles()
+    public List<RoleDataAccessModel>? GetRoles(int page, int pageSize)
     {
-        var roles = _publicUserUnity.Role.GetAll().ToList();
+        var roles = _publicUserUnity.Role.GetAll()?.ToList();
         
         return roles.MapObjToObj<List<RoleDataAccessModel>>();
     }

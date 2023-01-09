@@ -29,6 +29,11 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Repositories
             return Entity.AsNoTracking();
         }
 
+        public IQueryable<TEntity> GetAll(int page, int pageSize)
+        {
+            return Entity.Skip((page - 1) * pageSize).Take(pageSize).AsNoTracking();
+        }
+
         public TEntity? GetByGuid(Guid guid)
         {
             return Entity.SingleOrDefault(x => x.Guid == guid);

@@ -12,6 +12,15 @@ namespace EdwardSFlores.DataAccess.Database.Core.Configuration
         public DbSet<JobStation> JobStations { get; set; }
         
         public DbSet<Technology> Technology { get; set; }
+        
+        //Organization
+        public DbSet<Organization> Organizations { get; set; }
+        
+        // Projects
+        public DbSet<Project> Projects { get; set; }
+        
+        // Token
+        public DbSet<Token> Tokens { get; set; }
 
     }
 }

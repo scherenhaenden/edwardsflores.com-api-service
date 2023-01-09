@@ -4,7 +4,9 @@ namespace EdwardSFlores.DataAccess.Services.Public.Jobs;
 
 public class JobsDataAccessService: IJobsDataAccessService
 {
-    public List<JobDataAccessModel> GetJobs()
+  
+    
+    public List<JobDataAccessModel> GetJobs(int page, int pageSize)
     {
         throw new NotImplementedException();
     }
