@@ -1,18 +1,19 @@
 using EdwardSFlores.BusinessLogic.Tools;
+using EdwardSFlores.DataAccess.Database.Security;
+using EdwardSFlores.DataAccess.Services.Public.Users;
 
 namespace EdwardSFlores.BusinessLogic.Services.Login;
 
 public class LoginBusinessLogic : ILoginBusinessLogic
 {
-    private readonly IPasswordHasher _passwordHasher;
+    private readonly IUsersDataAccessService _usersDataAccessService;
 
-    public LoginBusinessLogic( IPasswordHasher passwordHasher)
+    public LoginBusinessLogic(IUsersDataAccessService usersDataAccessService)
     {
-
-        _passwordHasher = passwordHasher;
+        _usersDataAccessService = usersDataAccessService;
     }
 
-    public UserLoginBusinessOut Login(string username, string password)
+    public UserLoginBusinessOut? Login(string username, string password)
     {
         var userLoginBusinessIn = new UserLoginBusinessIn
         {
@@ -23,16 +24,29 @@ public class LoginBusinessLogic : ILoginBusinessLogic
         return Login(userLoginBusinessIn);
     }
 
-    public UserLoginBusinessOut Login(UserLoginBusinessIn userLoginBusinessIn)
+    public UserLoginBusinessOut? Login(UserLoginBusinessIn userLoginBusinessIn)
     {
         var userLoginBusinessOut = new UserLoginBusinessOut();
 
-        if (userLoginBusinessIn.Username == "admin" && _passwordHasher.VerifyHashedPassword(userLoginBusinessIn.Password, "admin"))
+       
+        
+        var result =_usersDataAccessService.Login(userLoginBusinessIn.Username, userLoginBusinessIn.Password);
+        
+        if(result == null)
         {
-            userLoginBusinessOut.IsAuthenticated = true;
-            userLoginBusinessOut.Username = userLoginBusinessIn.Username;
+            return null;
         }
-
+        userLoginBusinessOut.IsAuthenticated = true;
+        userLoginBusinessOut.Username = result.Username;
+        userLoginBusinessOut.Guid = result.Guid;
+        userLoginBusinessOut.Email = result.Email;
         return userLoginBusinessOut;
+    }
+
+    public bool NewPassword(string username, string password)
+    {
+
+
+        return _usersDataAccessService.NewPassword(username, password);
     }
 }

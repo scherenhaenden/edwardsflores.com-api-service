@@ -1,5 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using EdwardSFlores.BusinessLogic.Services.Users;
+using EdwardSFlores.DataAccess.Services.Public.Users;
 using EdwardSFlores.Service.Chaos;
 using EdwardSFlores.Service.Configuration.Models;
 using Microsoft.Extensions.Options;
@@ -18,21 +20,25 @@ public class JwtMiddleware
         _appSettings = appSettings.Value;
     }
 
-    public async Task Invoke(HttpContext context, IUserService userService)
+    public async Task Invoke(HttpContext context, IUsersBusinessLogic usersBusinessLogic)
     {
        
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
         if (token != null)
-            attachUserToContext(context, userService, token);
+            attachUserToContext(context, usersBusinessLogic, token);
 
         await _next(context);
     }
 
-    private void attachUserToContext(HttpContext context, IUserService userService, string token)
+    private void attachUserToContext(HttpContext context, IUsersBusinessLogic usersBusinessLogic, string token)
     {
         try
         {
+            
+            IJwtManagementService jwtManagementService = new JwtManagementService();
+            var result = jwtManagementService.ValidateToken(token, _appSettings.Temporal.JwtSecret);
+            
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Temporal.JwtSecret);
             tokenHandler.ValidateToken(token, new TokenValidationParameters
@@ -46,13 +52,14 @@ public class JwtMiddleware
             }, out SecurityToken validatedToken);
 
             var jwtToken = (JwtSecurityToken)validatedToken;
-            var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
+            var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "nameid").Value);
 
             // attach user to context on successful jwt validation
-            context.Items["User"] = userService.GetById(userId);
+            context.Items["User"] = usersBusinessLogic.GetUserById(userId);
         }
-        catch
+        catch(Exception e)
         {
+            string message = e.Message;
             // do nothing if jwt validation fails
             // user is not attached to context so request won't have access to secure routes
         }

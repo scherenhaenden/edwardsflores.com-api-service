@@ -1,7 +1,6 @@
 using EdwardSFlores.BusinessLogic.Services.SingUp;
 using EdwardSFlores.Service.Configuration.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 

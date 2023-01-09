@@ -10,6 +10,8 @@ public class User : BaseEntity
     public User()
     {
         UserRoles = new HashSet<Role>();
+        DirectTokens = new HashSet<Token>();
+        JobStations = new HashSet<JobStation>();
     }
     
     
@@ -21,5 +23,9 @@ public class User : BaseEntity
     public string Email { get; set; } = null!;
     
     public virtual ICollection<Role> UserRoles { get; set; }
+    
+    public virtual ICollection<Token> DirectTokens { get; set; }
+    
+    public virtual ICollection<JobStation> JobStations { get; set; }
     
 }

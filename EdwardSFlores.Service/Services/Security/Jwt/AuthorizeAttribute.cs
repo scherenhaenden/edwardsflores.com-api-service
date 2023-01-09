@@ -1,4 +1,3 @@
-using EdwardSFlores.DataAccess.Database.Core.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
