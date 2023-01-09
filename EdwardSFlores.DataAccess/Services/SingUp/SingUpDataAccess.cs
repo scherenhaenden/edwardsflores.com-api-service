@@ -1,60 +1,59 @@
 using EdwardSFlores.DataAccess.Database.ContextManagement;
 using EdwardSFlores.DataAccess.Database.Core.Domain;
 using EdwardSFlores.DataAccess.Database.Core.Unities;
+using EdwardSFlores.DataAccess.Database.Persistence.Unities.ServiceUnities;
+using EdwardSFlores.DataAccess.Database.Security;
+using EdwardSFlores.DataAccess.Models;
 
 namespace EdwardSFlores.DataAccess.Services.SingUp;
 
 public class SingUpDataAccess: ISingUpDataAccess
 {
-    private readonly IGenericUnitOfWork _genericUnitOfWork;
+    private readonly IPublicUserUnity _publicUserUnity;
     
-    public SingUpDataAccess(IDataContextManager dataContextManager)
+    
+    public SingUpDataAccess(IDataContextManager dataContextManager, IPasswordHasher passwordHasher)
 
     {
-        _genericUnitOfWork = dataContextManager.GenericUnityOfWork;
+        _publicUserUnity = new PublicUserUnity(dataContextManager, passwordHasher);
     }
     
     public Task<List<string>>? ProValidationSingUp(SingUpModelDataAccess singUpModel)
     {
         // check if username exists
-        var checkUserName =_genericUnitOfWork?.Users?.Where(x => x.Password == singUpModel.Username)?.Any();
+        var checkUserName = _publicUserUnity?.Users.GetUserByUsername(singUpModel.Username);
         // check if email exists
-        var checkEmail = _genericUnitOfWork?.Users?.Where(x => x.Email == singUpModel.Email)?.Any();
+        var checkEmail = _publicUserUnity?.Users.GetUserByEmail(singUpModel.Email);
         // check if password is valid
         // check if password and confirm password are the same
         
         var errors = new List<string>();
         
-        if (checkUserName??false)
+        if (checkUserName != null)
         {
             errors.Add("Username already exists");
         }
         
-        if (checkEmail??false)
+        if (checkEmail != null)
         {
             errors.Add("Email already exists");
         }
-     
-
-
-
         return null;
-
-
     }
 
     public Task<bool> SingUp(SingUpModelDataAccess singUpModel)
     {
 
-        // add new user
-        _genericUnitOfWork?.Users?.Add(new User
+        var user = new User
         {
             Username = singUpModel.Username,
             Email = singUpModel.Email,
             Password = singUpModel.Password,
-            
-        });
-        var result =  new Task<bool>(() => _genericUnitOfWork.Save());
+
+        };
+
+        _publicUserUnity?.Users.Add(user);
+        var result =  new Task<bool>(() => _publicUserUnity.Save());
         result.Start();
         result.Wait();
         return result;

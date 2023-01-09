@@ -1,37 +1,22 @@
-using EdwardSFlores.DataAccess.Database.ContextManagement;
 using EdwardSFlores.DataAccess.Database.Core.Domain;
-using EdwardSFlores.DataAccess.Database.Core.Unities;
-using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
-using Renci.SshNet;
+using EdwardSFlores.DataAccess.Database.Core.Repositories;
+using EdwardSFlores.DataAccess.Database.Security;
+using Microsoft.EntityFrameworkCore;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
 
-public interface IUsersDataAccessDatabaseRepository
+public interface IUsersDataAccessDatabaseRepository: IRepository<User>
 {
-    List<User> GetAll();
-}
-public class UsersDataAccessDatabaseRepository: GenericRepository<User>, IUsersDataAccessDatabaseRepository
-{
-    private readonly DbContextEdward _dbContextEdward;
-    private readonly IGenericUnitOfWork _genericUnitOfWork;
+    List<User?> GetAll();
     
-    public UsersDataAccessDatabaseRepository(IDataContextManager dataContextManager): base(dataContextManager.DbContextEdward)
-    {
-        _dbContextEdward = dataContextManager.DbContextEdward;
-        _genericUnitOfWork = dataContextManager.GenericUnityOfWork;
-    }
+    User? Login(string usernameOrEmail, string password);
+    
+    User? NewPassword(string usernameOrEmail, string password);
 
+    List<User?>? GetAllUsers();
 
-    public UsersDataAccessDatabaseRepository(DbContextEdward dbContextEdward): base(dbContextEdward)
-    {
-        _dbContextEdward = dbContextEdward;
-    }
+    User? GetUserByUsername(string username);
     
-    
-    public List<User> GetAll()
-    {
-        return _genericUnitOfWork.Users.GetAll().ToList();
-    }
-    
+    User? GetUserByEmail(string email);
 
 }

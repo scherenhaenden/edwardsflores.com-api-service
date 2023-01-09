@@ -4,6 +4,8 @@ using EdwardSFlores.DataAccess.Database.Core.Repositories;
 using EdwardSFlores.DataAccess.Database.Core.Unities;
 using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
 using EdwardSFlores.DataAccess.Database.Persistence.Repositories;
+using FluentMigrator.Runner;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
 {
@@ -14,9 +16,13 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
         public GenericGenericUnitOfWork(DbContextEdward context)
         {
             _context = context;
+            
 
             Role = InitObjects<Role>();
             Users = InitObjects<User>();
+            JobStations = InitObjects<JobStation>();
+            Technologies = InitObjects<Technology>();
+            Organizations = InitObjects<Organization>();
         }
     
         private  IRepository<T> InitObjects<T>()  where T : BaseEntity
@@ -25,7 +31,19 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
         }
 
         public IRepository<Role> Role { get; set; }
-        public IRepository<User> Users { get; set; }
+        public IRepository<User?> Users { get; set; }
+        public IRepository<JobStation> JobStations { get; set; }
+        public IRepository<Technology> Technologies { get; set; }
+        
+        // Organization
+        public IRepository<Organization> Organizations { get; set; }
+        
+        // Project
+        public IRepository<Project> Projects { get; set; }
+        
+        // Token
+        public IRepository<Token> Tokens { get; set; }
+
         public bool Save()
         {
             var result = _context.SaveChanges();
@@ -37,5 +55,7 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
             _context.Dispose();
         }
     }
+    
+    
 }
 

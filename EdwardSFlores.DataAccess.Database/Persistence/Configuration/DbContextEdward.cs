@@ -13,8 +13,11 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Configuration
         {
             try
             {
-                base.Database.EnsureCreated();   
+                base.Database.EnsureCreated();
+                
                 base.Database.OpenConnection();
+                base.Database.Migrate();
+                
             }catch(Exception ex)
             {
             
@@ -24,6 +27,10 @@ namespace EdwardSFlores.DataAccess.Database.Persistence.Configuration
 
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Role> Roles { get; set; } = null!;
-   
+        public DbSet<JobStation> JobStations { get; set; }= null!;
+        public DbSet<Technology> Technology { get; set; }= null!;
+        public DbSet<Organization> Organizations { get; set; }= null!;
+        public DbSet<Project> Projects { get; set; }= null!;
+        public DbSet<Token> Tokens { get; set; }= null!;
     }
 }

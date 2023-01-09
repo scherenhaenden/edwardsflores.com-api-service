@@ -1,5 +1,4 @@
 using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
-using EdwardSFlores.Service.Controllers.V1.PublicApi;
 using EdwardSFlores.Service.Services.Security.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
