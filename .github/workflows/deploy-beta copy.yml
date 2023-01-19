@@ -27,6 +27,12 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
           include-prerelease: true
+
+      - name: Git branch name
+        id: git-branch-name
+        uses: EthanSK/git-branch-name-action@v1
+      - name: Echo the branch name
+        run: echo "Branch name ${GIT_BRANCH_NAME}"
       - name: Run a multi-line script
         run: |
           sh ./build.sh
@@ -42,7 +48,7 @@ jobs:
           password: ${{ secrets.edwardsflores_password }}
           port: 22
           source: "./release.zip"
-          target: "./httpdocs/Docker/"
+          target: "./clients-uploads/${{ env.GIT_BRANCH_NAME }}"
 
       - name: multiple command
         uses: appleboy/ssh-action@master

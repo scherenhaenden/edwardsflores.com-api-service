@@ -1,16 +1,5 @@
-using EdwardSFlores.BusinessLogic.Services.Administration.Roles;
-using EdwardSFlores.BusinessLogic.Services.Login;
-using EdwardSFlores.BusinessLogic.Services.SingUp;
-using EdwardSFlores.BusinessLogic.Services.Technologies;
-using EdwardSFlores.BusinessLogic.Services.Users;
 using EdwardSFlores.DataAccess.Database.ContextManagement;
-using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
-using EdwardSFlores.DataAccess.Database.Security;
-using EdwardSFlores.DataAccess.Services.Private.AdministrationOfApplication;
-using EdwardSFlores.DataAccess.Services.Public.Jobs;
-using EdwardSFlores.DataAccess.Services.Public.Technologies;
-using EdwardSFlores.DataAccess.Services.Public.Users;
-using EdwardSFlores.DataAccess.Services.SingUp;
+using EdwardSFlores.Service.ApiConfiguration.ServicesRegistration;
 using EdwardSFlores.Service.Configuration.ContextManager;
 //using EdwardSFlores.Service.Configuration.ContextManager;
 using EdwardSFlores.Service.Configuration.Core;
@@ -78,46 +67,12 @@ var database = localSettings.DataAccess.DataBases.Global.FirstOrDefault(x => x.C
 //builder.Services.AddSingleton<IServiceCollectionProvider>(new ServiceCollectionProvider(builder.Services));
 var result =new MapConfigToSshModel().Map(localSettings);
 
-
-
 builder.Services.AddSingleton<IDataContextManager>(provider  => new DataContextManagerLocal(result));
 //builder.Services.AddSingleton<IDataContextManager>(provider  => new DataContextManagerSsh(result));
 
-// Add mysql context
-/*builder.Services.AddDbContext<DbContextEdward>(options =>
-    options.UseMySQL(database.ConnectionString));*/
+var registrationCarrier = new RegistrationCarrier();
+registrationCarrier.Register(builder.Services);
 
-
-// Add service injection for the unity of work
-//builder.Services.AddScoped<IGenericUnitOfWork, GenericGenericUnitOfWork>();
-
-
-
-builder.Services.AddScoped<IPasswordHasher, HasherV3>();
-builder.Services.AddScoped<ILoginBusinessLogic, LoginBusinessLogic>();
-builder.Services.AddScoped<ISingUpDataAccess, SingUpDataAccess>();
-builder.Services.AddScoped<ISingUpServiceBusinessLogic, SingUpServiceBusinessLogic>();
-
-
-builder.Services.AddScoped<IUsersDataAccessDatabaseRepository, UsersDataAccessDatabaseRepository>();
-builder.Services.AddScoped<IUsersDataAccessService, UsersDataAccessService>();
-builder.Services.AddScoped<IUsersBusinessLogic, UsersBusinessLogic>();
-
-builder.Services.AddScoped<ITechnologiesDataAccessDatabase, TechnologiesDataAccessDatabase>();
-builder.Services.AddScoped<ITechnologiesDataAccessService, TechnologiesDataAccessService>();
-builder.Services.AddScoped<ITechnologyBusiness, TechnologyBusiness>();
-
-builder.Services.AddScoped<IRolesDataAccessDatabase, RolesDataAccessDatabase>();
-builder.Services.AddScoped<IRolesDataAccessService, RolesDataAccessService>();
-builder.Services.AddScoped<IRolesBusinessLogic, RolesBusinessLogic>();
-
-
-
-builder.Services.AddScoped<IJobsStationsDataAccessDatabase, JobsStationsDataAccessDatabase>();
-builder.Services.AddScoped<IJobsStationsAdministrationDataAccess, JobsStationsAdministrationDataAccess>();
-
-builder.Services.AddScoped<IJobsStationsBusinessService, JobsStationsBusinessService>();
-    
 
 var app = builder.Build();
 
