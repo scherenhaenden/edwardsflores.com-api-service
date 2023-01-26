@@ -30,7 +30,7 @@ public class PasswordHasher : IPasswordHasher
             hashBuffer = keyDerivation.GetBytes(_options.HashSize);
         }
     
-        byte[] result = new byte[_options.HashSize + _options.SaltSize];
+        var result = new byte[_options.HashSize + _options.SaltSize];
         Buffer.BlockCopy(hashBuffer, 0, result, 0, _options.HashSize);
         Buffer.BlockCopy(saltBuffer, 0, result, _options.HashSize, _options.SaltSize);
         return Convert.ToBase64String(result);
@@ -39,15 +39,15 @@ public class PasswordHasher : IPasswordHasher
     public bool VerifyHashedPassword(string hashedPassword, string providedPassword)
     {
         // convert string to base64
-        byte[] hashedPasswordBytes = Convert.FromBase64String(hashedPassword);
+        var hashedPasswordBytes = Convert.FromBase64String(hashedPassword);
         if (hashedPasswordBytes.Length != _options.HashSize + _options.SaltSize)
         {
             return false;
         }
 
-        byte[] hashBytes = new byte[_options.HashSize];
+        var hashBytes = new byte[_options.HashSize];
         Buffer.BlockCopy(hashedPasswordBytes, 0, hashBytes, 0, _options.HashSize);
-        byte[] saltBytes = new byte[_options.SaltSize];
+        var saltBytes = new byte[_options.SaltSize];
         Buffer.BlockCopy(hashedPasswordBytes, _options.HashSize, saltBytes, 0, _options.SaltSize);
 
         byte[] providedHashBytes;

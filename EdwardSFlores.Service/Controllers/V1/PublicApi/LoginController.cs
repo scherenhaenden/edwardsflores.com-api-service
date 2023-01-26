@@ -70,7 +70,7 @@ public class LoginController : Controller
                 roles);
            
             
-            JwtManagementService jwtManagementService = new JwtManagementService();
+            var jwtManagementService = new JwtManagementService();
             var token= jwtManagementService.CreateToken(jwtCreatorModel);
             return Ok(new LoginResponse
             {

@@ -49,7 +49,7 @@ public class JwtMiddleware
                 ValidateAudience = false,
                 // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
                 ClockSkew = TimeSpan.Zero
-            }, out SecurityToken validatedToken);
+            }, out var validatedToken);
 
             var jwtToken = (JwtSecurityToken)validatedToken;
             var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "nameid").Value);
@@ -59,7 +59,7 @@ public class JwtMiddleware
         }
         catch(Exception e)
         {
-            string message = e.Message;
+            var message = e.Message;
             // do nothing if jwt validation fails
             // user is not attached to context so request won't have access to secure routes
         }
