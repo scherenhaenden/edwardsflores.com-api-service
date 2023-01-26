@@ -1,7 +1,5 @@
 using EdwardSFlores.DataAccess.Database.Core.Domain;
 using EdwardSFlores.DataAccess.Database.Core.Repositories;
-using EdwardSFlores.DataAccess.Database.Security;
-using Microsoft.EntityFrameworkCore;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
 

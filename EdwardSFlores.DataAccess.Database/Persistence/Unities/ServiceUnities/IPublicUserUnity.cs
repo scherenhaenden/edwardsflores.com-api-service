@@ -1,4 +1,3 @@
-using EdwardSFlores.DataAccess.Database.Core.Domain;
 using EdwardSFlores.DataAccess.Database.Core.Unities;
 using EdwardSFlores.DataAccess.Database.Persistence.Repositories.ServiceRepositories.Users;
 

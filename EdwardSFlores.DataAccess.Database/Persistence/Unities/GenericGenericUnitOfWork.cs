@@ -4,8 +4,6 @@ using EdwardSFlores.DataAccess.Database.Core.Repositories;
 using EdwardSFlores.DataAccess.Database.Core.Unities;
 using EdwardSFlores.DataAccess.Database.Persistence.Configuration;
 using EdwardSFlores.DataAccess.Database.Persistence.Repositories;
-using FluentMigrator.Runner;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace EdwardSFlores.DataAccess.Database.Persistence.Unities
 {

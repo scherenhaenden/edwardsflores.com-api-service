@@ -1,5 +1,3 @@
-using EdwardSFlores.Service.Configuration.Models;
-
 namespace EdwardSFlores.Service.Middlewares.Cors
 {
     public static class CorsMiddlewareExtensions

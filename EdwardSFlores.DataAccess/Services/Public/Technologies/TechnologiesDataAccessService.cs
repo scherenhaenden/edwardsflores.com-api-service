@@ -3,7 +3,6 @@ using EdwardSFlores.DataAccess.Database.Core.Domain;
 using EdwardSFlores.DataAccess.Database.Persistence.Unities.ServiceUnities;
 using EdwardSFlores.DataAccess.Database.Security;
 using EdwardSFlores.DataAccess.Models;
-using EdwardSFlores.DataAccess.Services.Public.Jobs;
 using Newtonsoft.Json;
 
 namespace EdwardSFlores.DataAccess.Services.Public.Technologies;

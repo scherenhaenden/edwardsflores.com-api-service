@@ -1,4 +1,3 @@
-using EdwardSFlores.DataAccess.Database.Core.Domain;
 using EdwardSFlores.DataAccess.Models;
 
 namespace EdwardSFlores.DataAccess.Services.Private.AdministrationOfApplication;

@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using EdwardSFlores.DataAccess.Database.Core.BaseDomain;
-using EdwardSFlores.DataAccess.Database.Core.Domain;
 
 namespace EdwardSFlores.DataAccess.Database.Core.Repositories
 {

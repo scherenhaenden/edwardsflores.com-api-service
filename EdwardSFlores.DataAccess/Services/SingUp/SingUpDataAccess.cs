@@ -1,6 +1,5 @@
 using EdwardSFlores.DataAccess.Database.ContextManagement;
 using EdwardSFlores.DataAccess.Database.Core.Domain;
-using EdwardSFlores.DataAccess.Database.Core.Unities;
 using EdwardSFlores.DataAccess.Database.Persistence.Unities.ServiceUnities;
 using EdwardSFlores.DataAccess.Database.Security;
 using EdwardSFlores.DataAccess.Models;

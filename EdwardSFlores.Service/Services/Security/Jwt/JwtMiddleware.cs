@@ -1,7 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using EdwardSFlores.BusinessLogic.Services.Users;
-using EdwardSFlores.DataAccess.Services.Public.Users;
 using EdwardSFlores.Service.Chaos;
 using EdwardSFlores.Service.Configuration.Models;
 using Microsoft.Extensions.Options;

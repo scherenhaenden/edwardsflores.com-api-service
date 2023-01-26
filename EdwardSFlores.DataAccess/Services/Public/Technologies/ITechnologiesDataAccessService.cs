@@ -1,6 +1,4 @@
-using System.Text.Json.Nodes;
 using EdwardSFlores.DataAccess.Models;
-using EdwardSFlores.DataAccess.Services.Public.Jobs;
 
 namespace EdwardSFlores.DataAccess.Services.Public.Technologies;
 
