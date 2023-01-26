@@ -29,6 +29,6 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build EdwardSFlores.Service --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore
       - name: Test
-        run: dotnet test  EdwardSFlores.Service --no-restore --verbosity normal
+        run: dotnet test  --no-restore --verbosity normal
