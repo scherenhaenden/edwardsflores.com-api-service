@@ -13,7 +13,7 @@ public class AdvancedEncryptionStandardProvider
 
     // Private properties
     private readonly ICryptoTransform _encryptor, _decryptor;
-    private UTF8Encoding _encoder;
+    private readonly UTF8Encoding _encoder;
 
     /// <summary>
     /// Default constructor
