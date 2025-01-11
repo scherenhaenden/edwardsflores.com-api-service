@@ -1,11 +1,3 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using EdwardSFlores.BusinessLogic.Services.Shared.Models;
-using EdwardSFlores.DataAccess.Database.Core.Domain;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-
 namespace EdwardSFlores.Service.Chaos;
 
 public class UserService : IUserService

@@ -43,20 +43,5 @@ fi
 #docker images | grep ${CONTAINER_NAME}  | awk '{print $3}' | xargs docker rmi -f
 cat ./release/output/appsettings.json
 
-# Build the docker image
-docker build -t ${CONTAINER_NAME} .
-
-# Run the docker image
-docker run -it -d -p 15009:80 -p 15008:443 --add-host=host.docker.internal:host-gateway ${CONTAINER_NAME}
-
-
-#docker images | grep edwardflores/service-beta  | awk '{print $3}'| xargs docker stop 
-
-#docker ps -q -f name=edwardflores/service-beta
-
-
-#docker ps -a -q --filter name='edwardflores/service-beta' --format="{{.ID}}"
-
-#docker ps |grep edwardflores/service-beta | awk '{print $1}' | xargs docker stop
-
-docker ps |grep edwardsfloresservice-web| awk '{print $3}'| xargs docker inspect 
+docker-compose -f docker-compose.Beta.yml build
+docker-compose -f docker-compose.Beta.yml up -d 

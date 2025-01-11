@@ -12,3 +12,6 @@ EdwardSFlores.Service/output/
 EdwardSFlores.DataAccess/bin/
 EdwardSFlores.DataAccess/obj/
 EdwardSFlores.Service/release/
+EdwardSFlores.Service.sln.DotSettings.user
+.vscode/
+appsettings.json

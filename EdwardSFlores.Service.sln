@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConfigFiles", "ConfigFiles"
 		run-dc.Beta.sh = run-dc.Beta.sh
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess.Database", "DataAccess.Database", "{2D51E1CA-1B7B-4CEA-883A-F71906564798}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +55,8 @@ Global
 		{991B34C0-6C54-473E-B221-35E471BC91A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{991B34C0-6C54-473E-B221-35E471BC91A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{991B34C0-6C54-473E-B221-35E471BC91A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{219DE40E-D025-4662-89BE-CFC83A258C61} = {2D51E1CA-1B7B-4CEA-883A-F71906564798}
 	EndGlobalSection
 EndGlobal
